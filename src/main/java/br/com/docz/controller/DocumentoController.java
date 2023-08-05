@@ -25,7 +25,7 @@ import br.com.docz.service.DocumentoService;
 @RequestMapping("/api/v1/documentos")
 public class DocumentoController {
 	
-	DocumentoService service;
+	private DocumentoService service;
 	
 	public DocumentoController(DocumentoService service) {
 		this.service = service;
@@ -81,7 +81,7 @@ public class DocumentoController {
 		return service.obterPorId(id).map(entity -> {
 			try {
 				Documento documento = converter(dto);
-				documento.setId(entity.getId());
+				//documento.setId(entity.getId());
 				service.atualizar(documento);
 				return ResponseEntity.ok(documento);
 			} catch (RegraNegocioException regraNegocioException) {
@@ -91,7 +91,7 @@ public class DocumentoController {
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public Optional<Object> deletar(@PathVariable("id") Integer id) {
+	public Optional<Object> deletar(@PathVariable("id") UUID id) {
 		return service.obterPorId(id).map(entity -> {
 			service.deletar(entity);
 			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);

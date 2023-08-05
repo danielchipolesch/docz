@@ -12,10 +12,10 @@ public class AssuntoBasico {
 	private Long id;
 	
 	@Column(name = "nm_assunto_basico")
-	private String NomeAssuntoBasico;
+	private String nomeAssuntoBasico;
 	
 	@Column(name = "nr_assunto_basico")
-	private String NumeroAssuntoBasico;
+	private String numeroAssuntoBasico;
 	
 	public Long getId() {
 		return id;
@@ -26,18 +26,18 @@ public class AssuntoBasico {
 	}
 	
 	public String getNomeAssuntoBasico() {
-		return NomeAssuntoBasico;
+		return nomeAssuntoBasico;
 	}
 	
 	public void setNomeAssuntoBasico(String nomeAssuntoBasico) {
-		NomeAssuntoBasico = nomeAssuntoBasico;
+		this.nomeAssuntoBasico = nomeAssuntoBasico;
 	}
 	
 	public String getNumeroAssuntoBasico() {
-		return NumeroAssuntoBasico;
+		return numeroAssuntoBasico;
 	}
 	
 	public void setNumeroAssuntoBasico(String numeroAssuntoBasico) {
-		NumeroAssuntoBasico = numeroAssuntoBasico;
+		this.numeroAssuntoBasico = numeroAssuntoBasico;
 	}
 }
