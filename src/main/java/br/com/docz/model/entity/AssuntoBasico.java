@@ -3,7 +3,7 @@ package br.com.docz.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="t_assunto_basico", schema="documento")
+@Table(name="t_assunto_basico", schema = "public")
 public class AssuntoBasico {
 	
 	@Id

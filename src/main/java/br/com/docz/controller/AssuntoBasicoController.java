@@ -10,26 +10,44 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/assunto-basico")
+@CrossOrigin(origins = "*")
 public class AssuntoBasicoController {
 	
-	private AssuntoBasicoService assuntoBasicoService;
-	private RegraNegocioException regraNegocioException;
+	AssuntoBasicoService assuntoBasicoService;
+	RegraNegocioException regraNegocioException;
+	
+	public AssuntoBasicoController(AssuntoBasicoService assuntoBasicoService){
+		this.assuntoBasicoService=assuntoBasicoService;
+	}
 	
 	@PostMapping()
-	public ResponseEntity<AssuntoBasico> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
-		var assuntoBasicoModel = new AssuntoBasico();
-		BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
-		return ResponseEntity.status(HttpStatus.CREATED).body(assuntoBasicoService.criar(assuntoBasicoModel));
+	public ResponseEntity<Object> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
+		try {
+			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
+			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
+			return ResponseEntity.status(HttpStatus.CREATED).body(assuntoBasicoService.criar(assuntoBasicoModel));
+		} catch (RegraNegocioException regraNegocioException) {
+			return ResponseEntity.badRequest().body(regraNegocioException.getMessage());
+		}
+		
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<AssuntoBasico>> listarTodos(){
-		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.listarTodos());
+	public ResponseEntity<List<Object>> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
+		try {
+			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
+			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
+			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonList(assuntoBasicoService.listarTodos(assuntoBasicoModel)));
+		} catch (RegraNegocioException regraNegocioException) {
+			return ResponseEntity.badRequest().body(Collections.singletonList(regraNegocioException.getMessage()));
+		}
+		
 	}
 	
 	@GetMapping("/{id}")

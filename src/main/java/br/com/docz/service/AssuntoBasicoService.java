@@ -24,7 +24,7 @@ public class AssuntoBasicoService {
 	}
 	
 	@Transactional
-	public List<AssuntoBasico> listarTodos(){
+	public List<AssuntoBasico> listarTodos(AssuntoBasico assuntoBasico){
 		return assuntoBasicoRepository.findAll();
 	}
 	
