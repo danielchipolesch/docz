@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/assunto-basico")
+@RequestMapping("/api/v1/assunto-basico")
 @CrossOrigin(origins = "*")
 public class AssuntoBasicoController {
 	
@@ -26,7 +27,7 @@ public class AssuntoBasicoController {
 		this.assuntoBasicoService=assuntoBasicoService;
 	}
 	
-	@PostMapping()
+	@PostMapping("/")
 	public ResponseEntity<Object> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
 		try {
 			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
@@ -38,14 +39,14 @@ public class AssuntoBasicoController {
 		
 	}
 	
-	@GetMapping()
-	public ResponseEntity<List<Object>> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
+	@GetMapping("/")
+	public ResponseEntity<Object> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
 		try {
 			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
-			return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonList(assuntoBasicoService.listarTodos(assuntoBasicoModel)));
+			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.listarTodos(assuntoBasicoModel));
 		} catch (RegraNegocioException regraNegocioException) {
-			return ResponseEntity.badRequest().body(Collections.singletonList(regraNegocioException.getMessage()));
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
 		}
 		
 	}
