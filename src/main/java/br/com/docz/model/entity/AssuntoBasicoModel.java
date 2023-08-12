@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="t_assunto_basico")
-public class AssuntoBasico {
+public class AssuntoBasicoModel {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class AssuntoBasico {
 	private String nomeAssuntoBasico;
 	
 	@Column(name = "nr_assunto_basico", nullable = false)
-	private Integer numeroAssuntoBasico;
+	private String numeroAssuntoBasico;
 	
 	public Integer getCodigoAssuntoBasico() {
 		return codigoAssuntoBasico;
@@ -35,11 +35,11 @@ public class AssuntoBasico {
 		this.nomeAssuntoBasico = nomeAssuntoBasico;
 	}
 	
-	public Integer getNumeroAssuntoBasico() {
+	public String getNumeroAssuntoBasico() {
 		return numeroAssuntoBasico;
 	}
 	
-	public void setNumeroAssuntoBasico(Integer numeroAssuntoBasico) {
+	public void setNumeroAssuntoBasico(String numeroAssuntoBasico) {
 		this.numeroAssuntoBasico = numeroAssuntoBasico;
 	}
 	
@@ -47,7 +47,7 @@ public class AssuntoBasico {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		AssuntoBasico that = (AssuntoBasico) o;
+		AssuntoBasicoModel that = (AssuntoBasicoModel) o;
 		return Objects.equals(codigoAssuntoBasico, that.codigoAssuntoBasico) && Objects.equals(nomeAssuntoBasico, that.nomeAssuntoBasico) && Objects.equals(numeroAssuntoBasico, that.numeroAssuntoBasico);
 	}
 	

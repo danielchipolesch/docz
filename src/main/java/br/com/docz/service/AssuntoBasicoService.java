@@ -1,6 +1,6 @@
 package br.com.docz.service;
 
-import br.com.docz.model.entity.AssuntoBasico;
+import br.com.docz.model.entity.AssuntoBasicoModel;
 import br.com.docz.model.repository.AssuntoBasicoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,28 +16,28 @@ public class AssuntoBasicoService {
 	private AssuntoBasicoRepository assuntoBasicoRepository;
 	
 	@Transactional
-	public AssuntoBasico criar(AssuntoBasico assuntoBasico){
+	public AssuntoBasicoModel criar(AssuntoBasicoModel assuntoBasico){
 		return assuntoBasicoRepository.save(assuntoBasico);
 	}
 	
 	@Transactional
-	public List<AssuntoBasico> listarTodos(AssuntoBasico assuntoBasico){
+	public List<AssuntoBasicoModel> listarTodos(AssuntoBasicoModel assuntoBasico){
 		return assuntoBasicoRepository.findAll();
 	}
 	
 	@Transactional
-	public Optional<AssuntoBasico> listarPorId(Integer id){
+	public Optional<AssuntoBasicoModel> listarPorId(Integer id){
 		return assuntoBasicoRepository.findById(id);
 	}
 	
 	@Transactional
-	public AssuntoBasico atualizar (AssuntoBasico assuntoBasico) {
+	public AssuntoBasicoModel atualizar (AssuntoBasicoModel assuntoBasico) {
 		
 		return assuntoBasicoRepository.save(assuntoBasico);
 	}
 	
 	@Transactional
-	public void deletar (AssuntoBasico assuntoBasico){
+	public void deletar (AssuntoBasicoModel assuntoBasico){
 		assuntoBasicoRepository.delete(assuntoBasico);
 	}
 
