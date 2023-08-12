@@ -6,13 +6,11 @@ import br.com.docz.model.entity.AssuntoBasico;
 import br.com.docz.service.AssuntoBasicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -20,21 +18,19 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class AssuntoBasicoController {
 	
+	@Autowired
 	AssuntoBasicoService assuntoBasicoService;
+	
 	RegraNegocioException regraNegocioException;
 	
-	public AssuntoBasicoController(AssuntoBasicoService assuntoBasicoService){
-		this.assuntoBasicoService=assuntoBasicoService;
-	}
-	
-	@PostMapping("/")
+	@PostMapping()
 	public ResponseEntity<Object> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
 		try {
-			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
+			var assuntoBasicoModel = new AssuntoBasico();		
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.CREATED).body(assuntoBasicoService.criar(assuntoBasicoModel));
 		} catch (RegraNegocioException regraNegocioException) {
-			return ResponseEntity.badRequest().body(regraNegocioException.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
 		}
 		
 	}
@@ -42,7 +38,7 @@ public class AssuntoBasicoController {
 	@GetMapping("/")
 	public ResponseEntity<Object> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
 		try {
-			AssuntoBasico assuntoBasicoModel = new AssuntoBasico();
+			var assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.listarTodos(assuntoBasicoModel));
 		} catch (RegraNegocioException regraNegocioException) {
@@ -52,28 +48,30 @@ public class AssuntoBasicoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Long id){
+	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não existe na base de dados.");
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Object> atualizar(@PathVariable(value="id") Long id,
-	                                        @RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
+	@PutMapping("/atualizar/{id}")
+	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
+											@RequestBody AssuntoBasicoDto assuntoBasicoDto){
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
+		
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não existe na base de dados.");
 		}
-		var assuntoBasicoModel = new AssuntoBasico();
+		var assuntoBasicoModel = assuntoBasico.get();
 		BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.atualizar(assuntoBasicoModel));
 	}
 	
-	@DeleteMapping()
-	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Long id){
+	
+	@DeleteMapping("/deletar/{id}")
+	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Integer id){
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não encontrado");

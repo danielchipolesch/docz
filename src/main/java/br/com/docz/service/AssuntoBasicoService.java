@@ -15,10 +15,7 @@ public class AssuntoBasicoService {
 	@Autowired
 	private AssuntoBasicoRepository assuntoBasicoRepository;
 	
-	public AssuntoBasicoService(AssuntoBasicoRepository assuntoBasicoRepository){
-		this.assuntoBasicoRepository=assuntoBasicoRepository;
-	}
-	
+	@Transactional
 	public AssuntoBasico criar(AssuntoBasico assuntoBasico){
 		return assuntoBasicoRepository.save(assuntoBasico);
 	}
@@ -29,12 +26,13 @@ public class AssuntoBasicoService {
 	}
 	
 	@Transactional
-	public Optional<AssuntoBasico> listarPorId(Long id){
+	public Optional<AssuntoBasico> listarPorId(Integer id){
 		return assuntoBasicoRepository.findById(id);
 	}
 	
 	@Transactional
 	public AssuntoBasico atualizar (AssuntoBasico assuntoBasico) {
+		
 		return assuntoBasicoRepository.save(assuntoBasico);
 	}
 	
