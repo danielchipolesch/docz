@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -36,7 +35,7 @@ public class AssuntoBasicoController {
 		
 	}
 	
-	@GetMapping("/")
+	@GetMapping()
 	public ResponseEntity<Object> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
 		try {
 			var assuntoBasicoModel = new AssuntoBasicoModel();

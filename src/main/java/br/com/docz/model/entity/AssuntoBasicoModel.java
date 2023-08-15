@@ -1,11 +1,16 @@
 package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name="t_assunto_basico")
+@DynamicUpdate
 public class AssuntoBasicoModel {
 	
 	@Id
@@ -18,6 +23,18 @@ public class AssuntoBasicoModel {
 	
 	@Column(name = "nr_assunto_basico", nullable = false)
 	private String numeroAssuntoBasico;
+	
+	@Column(name = "dt_criacao", updatable = false)
+	@CreationTimestamp
+	private Timestamp dataCriacao;
+	
+	@Column(name = "dt_alteracao")
+	@UpdateTimestamp
+	private Timestamp dataAlteracao;
+	
+	@Column(name = "nr_versao")
+	@Version
+	private Integer numeroVersao;
 	
 	public Integer getCodigoAssuntoBasico() {
 		return codigoAssuntoBasico;
@@ -41,6 +58,30 @@ public class AssuntoBasicoModel {
 	
 	public void setNumeroAssuntoBasico(String numeroAssuntoBasico) {
 		this.numeroAssuntoBasico = numeroAssuntoBasico;
+	}
+	
+	public Timestamp getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Timestamp dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Timestamp getDataAlteracao() {
+		return dataAlteracao;
+	}
+	
+	public void setDataAlteracao(Timestamp dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
+	public Integer getNumeroVersao() {
+		return numeroVersao;
+	}
+	
+	public void setNumeroVersao(Integer numeroVersao) {
+		this.numeroVersao = numeroVersao;
 	}
 	
 	@Override
