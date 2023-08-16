@@ -1,8 +1,9 @@
 package br.com.docz.controller;
 
+import br.com.docz.ExceptionHandler.AssuntoBasicoExceptionHandler;
 import br.com.docz.ExceptionHandler.RegraNegocioException;
 import br.com.docz.dto.AssuntoBasicoDto;
-import br.com.docz.model.entity.AssuntoBasicoModel;
+import br.com.docz.model.entity.AssuntoBasico;
 import br.com.docz.service.AssuntoBasicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -24,34 +25,32 @@ public class AssuntoBasicoController {
 	
 	
 	@PostMapping()
-	public ResponseEntity<Object> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
+	public ResponseEntity<Object> criar(@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto) {
 		try {
-			var assuntoBasicoModel = new AssuntoBasicoModel();
+			var assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.CREATED).body(assuntoBasicoService.criar(assuntoBasicoModel));
-		} catch (RegraNegocioException regraNegocioException) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
+		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.getLocalizedMessage());
 		}
-		
 	}
 	
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(AssuntoBasicoDto assuntoBasicoDto){
 		try {
-			var assuntoBasicoModel = new AssuntoBasicoModel();
+			var assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.listarTodos(assuntoBasicoModel));
 		} catch (RegraNegocioException regraNegocioException) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
 		}
-		
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
-		Optional<AssuntoBasicoModel> assuntoBasico = assuntoBasicoService.listarPorId(id);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não existe na base de dados");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
 	}
@@ -60,10 +59,10 @@ public class AssuntoBasicoController {
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
 											@RequestBody @Valid AssuntoBasicoDto assuntoBasicoDto){
 		
-		Optional<AssuntoBasicoModel> assuntoBasico = assuntoBasicoService.listarPorId(id);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não encontrado");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
 		}
 		
 		var assuntoBasicoModel = assuntoBasico.get();
@@ -74,18 +73,23 @@ public class AssuntoBasicoController {
 		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 		}
-		
 	}
 	
 	
 	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Integer id){
-		Optional<AssuntoBasicoModel> assuntoBasico = assuntoBasicoService.listarPorId(id);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não encontrado");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
 		}
-		assuntoBasicoService.deletar(assuntoBasico.get());
-		return ResponseEntity.status(HttpStatus.OK).body("Assunto básico deletado com sucesso!");
+		
+		try {
+			assuntoBasicoService.deletar(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Assunto básico deletado com sucesso!");
+		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		}
+
 	}
 	
 }

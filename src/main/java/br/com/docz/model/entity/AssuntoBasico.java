@@ -2,6 +2,7 @@ package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,9 +10,12 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name="t_assunto_basico")
+@Table(name="t_assunto_basico", uniqueConstraints = @UniqueConstraint(
+		name = "uk_nome_numero_assunto_basico",
+		columnNames = {"nm_assunto_basico", "nr_assunto_basico"}
+))
 @DynamicUpdate
-public class AssuntoBasicoModel {
+public class AssuntoBasico {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -88,7 +92,7 @@ public class AssuntoBasicoModel {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		AssuntoBasicoModel that = (AssuntoBasicoModel) o;
+		AssuntoBasico that = (AssuntoBasico) o;
 		return Objects.equals(codigoAssuntoBasico, that.codigoAssuntoBasico) && Objects.equals(nomeAssuntoBasico, that.nomeAssuntoBasico) && Objects.equals(numeroAssuntoBasico, that.numeroAssuntoBasico);
 	}
 	
