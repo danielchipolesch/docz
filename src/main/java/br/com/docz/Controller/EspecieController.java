@@ -44,10 +44,7 @@ public class EspecieController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
 		Optional<Especie> especie = especieService.listarPorId(id);
-		if (especie.isEmpty()){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieExceptionHandler.objectNotFound());
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(especie.get());
+		return especie.isEmpty() ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieExceptionHandler.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(especie.get());
 	}
 	
 	@PutMapping("/atualizar/{id}")

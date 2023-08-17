@@ -7,7 +7,6 @@ import br.com.docz.Service.AssuntoBasicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,10 +50,7 @@ public class AssuntoBasicoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(AssuntoBasicoExceptionHandler.parameterNotNull());
 		}
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
-		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
+		return assuntoBasico.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
 	}
 	
 	@PutMapping("/atualizar/{id}")
