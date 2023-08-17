@@ -1,4 +1,4 @@
-package br.com.docz.middleware;
+package br.com.docz.Middleware;
 
 public abstract class Url {
 	private static final String URL = "/api/v1";

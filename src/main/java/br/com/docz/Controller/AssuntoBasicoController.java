@@ -1,10 +1,9 @@
-package br.com.docz.controller;
+package br.com.docz.Controller;
 
 import br.com.docz.ExceptionHandler.AssuntoBasicoExceptionHandler;
-import br.com.docz.ExceptionHandler.RegraNegocioException;
-import br.com.docz.dto.AssuntoBasicoDto;
-import br.com.docz.model.entity.AssuntoBasico;
-import br.com.docz.service.AssuntoBasicoService;
+import br.com.docz.Dto.AssuntoBasicoDto;
+import br.com.docz.Model.Entity.AssuntoBasico;
+import br.com.docz.Service.AssuntoBasicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,8 @@ public class AssuntoBasicoController {
 			var assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.CREATED).body(assuntoBasicoService.criar(assuntoBasicoModel));
-		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error.getLocalizedMessage());
+		} catch (RuntimeException runtimeException) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
 		}
 	}
 	
@@ -41,16 +40,19 @@ public class AssuntoBasicoController {
 			var assuntoBasicoModel = new AssuntoBasico();
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.listarTodos(assuntoBasicoModel));
-		} catch (RegraNegocioException regraNegocioException) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(regraNegocioException.getMessage());
+		} catch (RuntimeException runtimeException) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
 		}
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
+		if (id == null){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(AssuntoBasicoExceptionHandler.parameterNotNull());
+		}
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
 	}
@@ -62,7 +64,7 @@ public class AssuntoBasicoController {
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
 		}
 		
 		var assuntoBasicoModel = assuntoBasico.get();
@@ -70,8 +72,8 @@ public class AssuntoBasicoController {
 		try {
 			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
 			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.atualizar(assuntoBasicoModel));
-		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		} catch (RuntimeException runtimeException) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
 		}
 	}
 	
@@ -80,14 +82,14 @@ public class AssuntoBasicoController {
 	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Integer id){
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.AssuntoBasicoNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
 		}
 		
 		try {
 			assuntoBasicoService.deletar(id);
 			return ResponseEntity.status(HttpStatus.OK).body("Assunto básico deletado com sucesso!");
-		} catch (RegraNegocioException | NullPointerException | DataIntegrityViolationException error) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+		} catch (RuntimeException runtimeException) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
 		}
 
 	}

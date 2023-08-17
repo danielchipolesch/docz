@@ -2,17 +2,17 @@ package br.com.docz.ExceptionHandler;
 
 import br.com.docz.Helper.ExceptionHelper;
 
-public class AssuntoBasicoExceptionHandler implements ExceptionHelper {
-	
+public class EspecieExceptionHandler implements ExceptionHelper {
 	public static String objectNotFound(){
-		return "Assunto Básico não encontrado";
+		return "Espécie não encontrada";
 	}
 	
 	public static String fieldNotNull(){
-		return "Nenhum campo pode ser nulo";
+		return "Campos não podem ser nulos";
 	}
 	
 	public static String parameterNotNull(){
 		return "Parâmetro não pode ser nulo";
 	}
+	
 }

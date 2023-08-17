@@ -1,8 +1,7 @@
-package br.com.docz.service;
+package br.com.docz.Service;
 
-import br.com.docz.ExceptionHandler.AssuntoBasicoExceptionHandler;
-import br.com.docz.model.entity.AssuntoBasico;
-import br.com.docz.model.repository.AssuntoBasicoRepository;
+import br.com.docz.Model.Entity.AssuntoBasico;
+import br.com.docz.Model.Repository.AssuntoBasicoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

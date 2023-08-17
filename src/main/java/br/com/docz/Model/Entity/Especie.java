@@ -1,4 +1,4 @@
-package br.com.docz.model.entity;
+package br.com.docz.Model.Entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
