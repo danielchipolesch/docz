@@ -51,14 +51,16 @@ public class EspecieController {
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
 	                                        @RequestBody @Valid EspecieDto especieDto){
+		
 		Optional<Especie> especie = especieService.listarPorId(id);
+		
 		if (especie.isEmpty()){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieExceptionHandler.parameterNotNull());
 		}
 		try {
-			var especieModel = new Especie();
+			var especieModel = especie.get();
 			BeanUtils.copyProperties(especieDto, especieModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(especieService.criar(especieModel));
+			return ResponseEntity.status(HttpStatus.OK).body(especieService.atualizar(especieModel));
 		} catch (RuntimeException runtimeException){
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
 		}

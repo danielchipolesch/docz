@@ -68,9 +68,9 @@ public class AtoAprovacaoController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(AtoAprovacaoException.parameterNotNull());
 		}
 		try {
-			var atoAprovacaoModel = new AtoAprovacao();
+			var atoAprovacaoModel = atoAprovacao.get();
 			BeanUtils.copyProperties(atoAprovacaoDto, atoAprovacaoModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(atoAprovacaoService.criar(atoAprovacaoModel));
+			return ResponseEntity.status(HttpStatus.OK).body(atoAprovacaoService.atualizar(atoAprovacaoModel));
 		} catch (Exception e){
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
 		}

@@ -26,7 +26,7 @@ public class Especie {
 	@Column(name = "nm_especie", nullable = false)
 	private String nomeEspecie;
 	
-	@Column(name = "dt_criacao")
+	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp
 	private Timestamp dataCriacao;
 	

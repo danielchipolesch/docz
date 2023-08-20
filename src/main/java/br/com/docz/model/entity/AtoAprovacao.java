@@ -27,7 +27,7 @@ public class AtoAprovacao {
 	@Column(name = "nm_autoridade")
 	private String nomeAutoridade;
 	
-	@Column(name = "dt_criacao")
+	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp
 	private Timestamp dataCriacao;
 	
