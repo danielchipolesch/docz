@@ -1,9 +1,9 @@
-package br.com.docz.Controller;
+package br.com.docz.controller;
 
-import br.com.docz.ExceptionHandler.EspecieExceptionHandler;
-import br.com.docz.Dto.EspecieDto;
-import br.com.docz.Model.Entity.Especie;
-import br.com.docz.Service.EspecieService;
+import br.com.docz.dto.EspecieDto;
+import br.com.docz.exception.EspecieExceptionHandler;
+import br.com.docz.model.entity.Especie;
+import br.com.docz.service.EspecieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("/api/v1/especie")
 @CrossOrigin(origins = "*")
 public class EspecieController {
+	
 	@Autowired
 	EspecieService especieService;
 	

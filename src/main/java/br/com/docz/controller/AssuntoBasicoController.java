@@ -1,9 +1,9 @@
-package br.com.docz.Controller;
+package br.com.docz.controller;
 
-import br.com.docz.ExceptionHandler.AssuntoBasicoExceptionHandler;
-import br.com.docz.Dto.AssuntoBasicoDto;
-import br.com.docz.Model.Entity.AssuntoBasico;
-import br.com.docz.Service.AssuntoBasicoService;
+import br.com.docz.dto.AssuntoBasicoDto;
+import br.com.docz.exception.AssuntoBasicoExceptionHandler;
+import br.com.docz.model.entity.AssuntoBasico;
+import br.com.docz.service.AssuntoBasicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

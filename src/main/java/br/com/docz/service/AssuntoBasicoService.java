@@ -1,10 +1,11 @@
-package br.com.docz.Service;
+package br.com.docz.service;
 
-import br.com.docz.Model.Entity.AssuntoBasico;
-import br.com.docz.Model.Repository.AssuntoBasicoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.com.docz.model.entity.AssuntoBasico;
+import br.com.docz.model.repository.AssuntoBasicoRepository;
 
 import java.util.List;
 import java.util.Optional;

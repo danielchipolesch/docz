@@ -1,4 +1,4 @@
-package br.com.docz.Dto;
+package br.com.docz.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

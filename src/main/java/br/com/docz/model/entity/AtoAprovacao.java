@@ -1,4 +1,4 @@
-package br.com.docz.Model.Entity;
+package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,22 +12,29 @@ import java.util.Objects;
 @Table(name = "t_ato_aprovacao")
 @DynamicUpdate
 public class AtoAprovacao {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_ato_aprovacao")
 	private Integer codigoAtoAprovacao;
+	
 	@Column(name = "tx_ementa")
 	private String textoEmenta;
+	
 	@Column(name = "tx_portaria")
 	private String textoPortaria;
+	
 	@Column(name = "nm_autoridade")
 	private String nomeAutoridade;
+	
 	@Column(name = "dt_criacao")
 	@CreationTimestamp
 	private Timestamp dataCriacao;
+	
 	@Column(name = "dt_alteracao")
 	@UpdateTimestamp
 	private Timestamp dataAlteracao;
+	
 	@Column(name = "nr_versao")
 	@Version
 	private Integer numeroVersao;

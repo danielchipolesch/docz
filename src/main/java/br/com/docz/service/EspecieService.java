@@ -1,8 +1,5 @@
-package br.com.docz.Service;
+package br.com.docz.service;
 
-import br.com.docz.Model.Entity.AssuntoBasico;
-import br.com.docz.Model.Entity.Especie;
-import br.com.docz.Model.Repository.EspecieRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import br.com.docz.model.entity.AssuntoBasico;
+import br.com.docz.model.entity.Especie;
+import br.com.docz.model.repository.EspecieRepository;
 
 import java.util.Optional;
 
