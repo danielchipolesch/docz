@@ -10,7 +10,7 @@ public interface ExceptionHelper {
 		return param + " não pode(m) ser nulo(s)";
 	}
 	
-	public static String parameterNotNull(String param){
-		return param + " não pode(m) ser nulo(s)";
+	public static String parameterNotNull(){
+		return "Parâmetro não pode ser nulo";
 	}
 }

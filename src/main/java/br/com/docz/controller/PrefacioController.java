@@ -1,54 +1,45 @@
 package br.com.docz.controller;
 
-import java.util.Optional;
-
+import br.com.docz.dto.PrefacioDto;
+import br.com.docz.exception.PrefacioException;
+import br.com.docz.model.entity.Prefacio;
+import br.com.docz.service.PrefacioService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import br.com.docz.dto.SumarioDto;
-import br.com.docz.exception.SumarioException;
-import br.com.docz.service.SumarioService;
-import br.com.docz.model.entity.Sumario;
+import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/v1/sumario")
+@RequestMapping("/api/v1/prefacio")
 @CrossOrigin(origins = "*")
-public class SumarioController {
+public class PrefacioController {
 	
 	@Autowired
-	private SumarioService sumarioService;
+	private PrefacioService prefacioService;
 	
-	private String sumarioConst = "Sumário"; 
+	private String prefacioConst = "Prefácio";
 	
 	@PostMapping()
-	public ResponseEntity<Object> criar(@RequestBody SumarioDto sumarioDto){
+	public ResponseEntity<Object> criar(@RequestBody PrefacioDto prefacioDto){
 		try {
-			var sumarioModel = new Sumario();
-			BeanUtils.copyProperties(sumarioDto, sumarioModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(sumarioService.criar(sumarioModel));
+			var prefacioModel = new Prefacio();
+			BeanUtils.copyProperties(prefacioDto, prefacioModel);
+			return ResponseEntity.status(HttpStatus.CREATED).body(prefacioService.criar(prefacioModel));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
 		}		
 	}
 	
 	@GetMapping()
-	public ResponseEntity<Object> listarTodos(SumarioDto sumarioDto){
+	public ResponseEntity<Object> listarTodos(PrefacioDto prefacioDto){
 		try {
-			var sumarioModel = new Sumario();
-			BeanUtils.copyProperties(sumarioDto, sumarioModel);
-			return ResponseEntity.status(HttpStatus.OK).body(sumarioService.listarTodos(sumarioModel));
+			var prefacioModel = new Prefacio();
+			BeanUtils.copyProperties(prefacioDto, prefacioModel);
+			return ResponseEntity.status(HttpStatus.OK).body(prefacioService.listarTodos(prefacioModel));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
 		}
@@ -56,21 +47,21 @@ public class SumarioController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value="id") Integer id){
-		Optional<Sumario> sumario = sumarioService.listarPorId(id);
-		return sumario.isEmpty() ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(SumarioException.objectNotFound(sumarioConst)) : ResponseEntity.status(HttpStatus.OK).body(sumario.get());
+		Optional<Prefacio> prefacio = prefacioService.listarPorId(id);
+		return prefacio.isEmpty() ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(PrefacioException.objectNotFound(prefacioConst)) : ResponseEntity.status(HttpStatus.OK).body(prefacio.get());
 	}
 	
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Object> atualizar(@PathVariable(value="id") Integer id,
-											@RequestBody SumarioDto sumarioDto){
-		Optional<Sumario> sumario = sumarioService.listarPorId(id);
-		if (sumario.isEmpty()){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(SumarioException.parameterNotNull());
+											@RequestBody PrefacioDto prefacioDto){
+		Optional<Prefacio> prefacio = prefacioService.listarPorId(id);
+		if (prefacio.isEmpty()){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(PrefacioException.parameterNotNull());
 		}
 		try {
-			var sumarioModel = sumario.get();
-			BeanUtils.copyProperties(sumarioDto, sumarioModel);
-			return ResponseEntity.status(HttpStatus.OK).body(sumarioService.atualizar(sumarioModel));
+			var prefacioModel = prefacio.get();
+			BeanUtils.copyProperties(prefacioDto, prefacioModel);
+			return ResponseEntity.status(HttpStatus.OK).body(prefacioService.atualizar(prefacioModel));
 		} catch (Exception e){
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
 		}
@@ -78,14 +69,14 @@ public class SumarioController {
 	
 	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Object> deletar(@PathVariable(value="id") Integer id){
-		Optional<Sumario> sumario = sumarioService.listarPorId(id);
-		if (sumario.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(SumarioException.objectNotFound(sumarioConst));
+		Optional<Prefacio> prefacio = prefacioService.listarPorId(id);
+		if (prefacio.isEmpty()){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(PrefacioException.objectNotFound(prefacioConst));
 		}
 		
 		try {
-			sumarioService.deletar(id);
-			return ResponseEntity.status(HttpStatus.OK).body("Sumário deletado com sucesso!");
+			prefacioService.deletar(id);
+			return ResponseEntity.status(HttpStatus.OK).body("Prefácio deletado com sucesso!");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
 		}

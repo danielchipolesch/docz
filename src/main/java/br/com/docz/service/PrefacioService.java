@@ -1,7 +1,7 @@
 package br.com.docz.service;
 
-import br.com.docz.model.entity.Sumario;
-import br.com.docz.model.repository.SumarioRepository;
+import br.com.docz.model.entity.Prefacio;
+import br.com.docz.model.repository.PrefacioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,33 +10,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SumarioService {
+public class PrefacioService {
 	
 	@Autowired
-	private SumarioRepository sumarioRepository;
+	private PrefacioRepository prefacioRepository;
 
 	@Transactional
-	public Sumario criar(Sumario sumario) {
-		return sumarioRepository.save(sumario);
+	public Prefacio criar(Prefacio prefacio) {
+		return prefacioRepository.save(prefacio);
 	}
 	
 	@Transactional
-	public List<Sumario> listarTodos(Sumario sumario){
-		return sumarioRepository.findAll();
+	public List<Prefacio> listarTodos(Prefacio prefacio){
+		return prefacioRepository.findAll();
 	}
 	
 	@Transactional
-	public Optional<Sumario> listarPorId(Integer id) {
-		return sumarioRepository.findById(id);
+	public Optional<Prefacio> listarPorId(Integer id) {
+		return prefacioRepository.findById(id);
 	}
 	
 	@Transactional
-	public Sumario atualizar(Sumario sumario) {
-		return sumarioRepository.save(sumario);
+	public Prefacio atualizar(Prefacio prefacio) {
+		return prefacioRepository.save(prefacio);
 	}
 	
 	@Transactional
 	public void deletar(Integer id) {
-		sumarioRepository.deleteById(id);
+		prefacioRepository.deleteById(id);
 	}
 }
