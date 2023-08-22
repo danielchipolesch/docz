@@ -1,7 +1,7 @@
 package br.com.docz.controller;
 
 import br.com.docz.dto.AssuntoBasicoDto;
-import br.com.docz.exception.AssuntoBasicoExceptionHandler;
+import br.com.docz.exception.AssuntoBasicoException;
 import br.com.docz.model.entity.AssuntoBasico;
 import br.com.docz.service.AssuntoBasicoService;
 import jakarta.validation.Valid;
@@ -47,10 +47,10 @@ public class AssuntoBasicoController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
 		if (id == null){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(AssuntoBasicoExceptionHandler.parameterNotNull());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(AssuntoBasicoException.parameterNotNull());
 		}
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
-		return assuntoBasico.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
+		return assuntoBasico.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoException.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(assuntoBasico.get());
 	}
 	
 	@PutMapping("/atualizar/{id}")
@@ -60,7 +60,7 @@ public class AssuntoBasicoController {
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoException.objectNotFound());
 		}
 		
 		var assuntoBasicoModel = assuntoBasico.get();
@@ -78,7 +78,7 @@ public class AssuntoBasicoController {
 	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Integer id){
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		if (assuntoBasico.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoExceptionHandler.objectNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoException.objectNotFound());
 		}
 		
 		try {

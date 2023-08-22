@@ -1,7 +1,7 @@
 package br.com.docz.controller;
 
 import br.com.docz.dto.EspecieDto;
-import br.com.docz.exception.EspecieExceptionHandler;
+import br.com.docz.exception.EspecieException;
 import br.com.docz.model.entity.Especie;
 import br.com.docz.service.EspecieService;
 import jakarta.validation.Valid;
@@ -45,7 +45,7 @@ public class EspecieController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> listarPorId(@PathVariable(value = "id") Integer id){
 		Optional<Especie> especie = especieService.listarPorId(id);
-		return especie.isEmpty() ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieExceptionHandler.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(especie.get());
+		return especie.isEmpty() ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieException.objectNotFound()) : ResponseEntity.status(HttpStatus.OK).body(especie.get());
 	}
 	
 	@PutMapping("/atualizar/{id}")
@@ -55,7 +55,7 @@ public class EspecieController {
 		Optional<Especie> especie = especieService.listarPorId(id);
 		
 		if (especie.isEmpty()){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieExceptionHandler.parameterNotNull());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(EspecieException.parameterNotNull());
 		}
 		try {
 			var especieModel = especie.get();
@@ -70,7 +70,7 @@ public class EspecieController {
 	public ResponseEntity<Object> deletar(@PathVariable(value = "id") Integer id){
 		Optional<Especie> especie = especieService.listarPorId(id);
 		if (especie.isEmpty()){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EspecieExceptionHandler.objectNotFound());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EspecieException.objectNotFound());
 		}
 		
 		try {
