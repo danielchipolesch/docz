@@ -2,6 +2,8 @@ package br.com.docz.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,6 +14,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_anexo")
 @DynamicUpdate
+@EqualsAndHashCode
+@ToString
 public class Anexo {
 	
 	@Id
@@ -96,31 +100,5 @@ public class Anexo {
 	
 	public void setNumeroVersao(Integer numeroVersao) {
 		this.numeroVersao = numeroVersao;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Anexo)) return false;
-		Anexo anexo = (Anexo) o;
-		return Objects.equals(getCodigoAnexo(), anexo.getCodigoAnexo()) && Objects.equals(getDocumento(), anexo.getDocumento()) && Objects.equals(getNomeAnexo(), anexo.getNomeAnexo()) && Objects.equals(getTextoAnexo(), anexo.getTextoAnexo()) && Objects.equals(getDataCriacao(), anexo.getDataCriacao()) && Objects.equals(getDataAlteracao(), anexo.getDataAlteracao()) && Objects.equals(getNumeroVersao(), anexo.getNumeroVersao());
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(getCodigoAnexo(), getDocumento(), getNomeAnexo(), getTextoAnexo(), getDataCriacao(), getDataAlteracao(), getNumeroVersao());
-	}
-	
-	@Override
-	public String toString() {
-		return "Anexo{" +
-				"codigoAnexo=" + codigoAnexo +
-				", documento=" + documento +
-				", nomeAnexo='" + nomeAnexo + '\'' +
-				", textoAnexo='" + textoAnexo + '\'' +
-				", dataCriacao=" + dataCriacao +
-				", dataAlteracao=" + dataAlteracao +
-				", numeroVersao=" + numeroVersao +
-				'}';
 	}
 }
