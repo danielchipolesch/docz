@@ -2,6 +2,7 @@ package br.com.docz.controller;
 
 import br.com.docz.dto.CapituloDto;
 import br.com.docz.exception.CapituloException;
+import br.com.docz.exception.DocumentoException;
 import br.com.docz.model.entity.Capitulo;
 import br.com.docz.model.entity.Documento;
 import br.com.docz.service.CapituloService;
@@ -23,16 +24,32 @@ public class CapituloController {
 	@Autowired
 	CapituloService capituloService;
 	
+	@Autowired
+	DocumentoService documentoService;
+	
 	@PostMapping()
 	public ResponseEntity<Object> criar (@RequestBody @Valid CapituloDto capituloDto){
-		try {
-			var capituloModel = new Capitulo();
-			BeanUtils.copyProperties(capituloDto, capituloModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(capituloService.criar(capituloModel));
-		} catch (RuntimeException runtimeException){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
+		
+		var id = capituloDto.documento().getCodigoDocumento();
+		Optional<Documento> documento = documentoService.listarPorId(id);
+		
+		if (documento.isPresent()){
+		
+			try {
+				var capituloModel = new Capitulo();
+				BeanUtils.copyProperties(capituloDto, capituloModel);
+				capituloModel.setDocumento(documento.get());
+				return ResponseEntity.status(HttpStatus.CREATED).body(capituloService.criar(capituloModel));
+			
+			} catch (Exception e) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			}
+		
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(DocumentoException.objectNotFound());
 		}
 	}
+	
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(CapituloDto capituloDto){
 		try {
@@ -59,12 +76,21 @@ public class CapituloController {
 		if (capitulo.isEmpty()){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(CapituloException.parameterNotNull());
 		}
-		try {
-			var capituloModel = capitulo.get();
-			BeanUtils.copyProperties(capituloDto, capituloModel);
-			return ResponseEntity.status(HttpStatus.OK).body(capituloService.atualizar(capituloModel));
-		} catch (RuntimeException runtimeException){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
+		
+		var idDocumento = capituloDto.documento().getCodigoDocumento();
+		Optional<Documento> documento = documentoService.listarPorId(idDocumento);
+		if (documento.isPresent()) {
+			
+			try {
+				var capituloModel = capitulo.get();
+				BeanUtils.copyProperties(capituloDto, capituloModel);
+				capituloModel.setDocumento(documento.get());
+				return ResponseEntity.status(HttpStatus.OK).body(capituloService.atualizar(capituloModel));
+			} catch (RuntimeException runtimeException) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
+			}
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(DocumentoException.objectNotFound());
 		}
 	}
 	

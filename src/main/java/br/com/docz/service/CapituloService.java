@@ -15,15 +15,10 @@ public class CapituloService {
 	
 	@Autowired
 	private CapituloRepository capituloRepository;
-	@Autowired
-	DocumentoService documentoService;
 	
 
 	@Transactional
 	public Capitulo criar(Capitulo capitulo) {
-		var id = capitulo.getDocumento().getCodigoDocumento();
-		Optional<Documento> documento = documentoService.listarPorId(id);
-		capitulo.setDocumento(documento.get());
 		return capituloRepository.save(capitulo);
 	}
 	
@@ -39,9 +34,6 @@ public class CapituloService {
 	
 	@Transactional
 	public Capitulo atualizar(Capitulo capitulo) {
-		var id = capitulo.getDocumento().getCodigoDocumento();
-		Optional<Documento> documento = documentoService.listarPorId(id);
-		capitulo.setDocumento(documento.get());
 		return capituloRepository.save(capitulo);
 	}
 	
