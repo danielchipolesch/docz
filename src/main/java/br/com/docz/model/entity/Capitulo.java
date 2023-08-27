@@ -21,7 +21,7 @@ public class Capitulo {
 	private Integer codigoCapitulo;
 	
 	@ManyToOne//(cascade = MERGE)
-	@JoinColumn(name = "cd_documento", updatable = false)//, referencedColumnName = "cd_documento" , nullable = false)
+	@JoinColumn(name = "cd_documento", updatable = false, nullable = false)
 	@JsonBackReference
 	private Documento documento;
 	
