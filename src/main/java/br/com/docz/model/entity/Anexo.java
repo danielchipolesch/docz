@@ -8,31 +8,27 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
-@Table(name = "t_capitulo")
+@Table(name = "t_anexo")
 @DynamicUpdate
-public class Capitulo {
+public class Anexo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_capitulo")
-	private Integer codigoCapitulo;
+	@Column(name = "cd_anexo")
+	private Integer codigoAnexo;
 	
 	@ManyToOne
-	@JoinColumn(name = "cd_documento", updatable = false, nullable = false)
+	@JoinColumn(name = "cd_documento", updatable = false, nullable = true)
 	@JsonBackReference
 	private Documento documento;
 	
-	@Column(name = "nm_capitulo", nullable = false)
-	private String nomeCapitulo;
+	@Column(name = "nm_anexo", nullable = false)
+	private String nomeAnexo;
 	
-	@Column(name = "tx_capitulo")
-	private String textoCapitulo;
-	
-	@Column(name = "nr_ordem_capitulo")
-	private Integer numeroOrdemCapitulo;
+	@Column(name = "tx_anexo")
+	private String textoAnexo;
 	
 	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp
@@ -46,12 +42,12 @@ public class Capitulo {
 	@Version
 	private Integer numeroVersao;
 	
-	public Integer getCodigoCapitulo() {
-		return codigoCapitulo;
+	public Integer getCodigoAnexo() {
+		return codigoAnexo;
 	}
 	
-	public void setCodigoCapitulo(Integer codigoCapitulo) {
-		this.codigoCapitulo = codigoCapitulo;
+	public void setCodigoAnexo(Integer codigoAnexo) {
+		this.codigoAnexo = codigoAnexo;
 	}
 	
 	public Documento getDocumento() {
@@ -62,28 +58,20 @@ public class Capitulo {
 		this.documento = documento;
 	}
 	
-	public String getNomeCapitulo() {
-		return nomeCapitulo;
+	public String getNomeAnexo() {
+		return nomeAnexo;
 	}
 	
-	public void setNomeCapitulo(String nomeCapitulo) {
-		this.nomeCapitulo = nomeCapitulo;
+	public void setNomeAnexo(String nomeAnexo) {
+		this.nomeAnexo = nomeAnexo;
 	}
 	
-	public String getTextoCapitulo() {
-		return textoCapitulo;
+	public String getTextoAnexo() {
+		return textoAnexo;
 	}
 	
-	public void setTextoCapitulo(String textoCapitulo) {
-		this.textoCapitulo = textoCapitulo;
-	}
-	
-	public Integer getNumeroOrdemCapitulo() {
-		return numeroOrdemCapitulo;
-	}
-	
-	public void setNumeroOrdemCapitulo(Integer numeroOrdemCapitulo) {
-		this.numeroOrdemCapitulo = numeroOrdemCapitulo;
+	public void setTextoAnexo(String textoAnexo) {
+		this.textoAnexo = textoAnexo;
 	}
 	
 	public Timestamp getDataCriacao() {
@@ -113,24 +101,23 @@ public class Capitulo {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof Capitulo)) return false;
-		Capitulo capitulo = (Capitulo) o;
-		return Objects.equals(getCodigoCapitulo(), capitulo.getCodigoCapitulo()) && Objects.equals(getDocumento(), capitulo.getDocumento()) && Objects.equals(getNomeCapitulo(), capitulo.getNomeCapitulo()) && Objects.equals(getTextoCapitulo(), capitulo.getTextoCapitulo()) && Objects.equals(getNumeroOrdemCapitulo(), capitulo.getNumeroOrdemCapitulo()) && Objects.equals(getDataCriacao(), capitulo.getDataCriacao()) && Objects.equals(getDataAlteracao(), capitulo.getDataAlteracao()) && Objects.equals(getNumeroVersao(), capitulo.getNumeroVersao());
+		if (!(o instanceof Anexo)) return false;
+		Anexo anexo = (Anexo) o;
+		return Objects.equals(getCodigoAnexo(), anexo.getCodigoAnexo()) && Objects.equals(getDocumento(), anexo.getDocumento()) && Objects.equals(getNomeAnexo(), anexo.getNomeAnexo()) && Objects.equals(getTextoAnexo(), anexo.getTextoAnexo()) && Objects.equals(getDataCriacao(), anexo.getDataCriacao()) && Objects.equals(getDataAlteracao(), anexo.getDataAlteracao()) && Objects.equals(getNumeroVersao(), anexo.getNumeroVersao());
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(getCodigoCapitulo(), getDocumento(), getNomeCapitulo(), getTextoCapitulo(), getNumeroOrdemCapitulo(), getDataCriacao(), getDataAlteracao(), getNumeroVersao());
+		return Objects.hash(getCodigoAnexo(), getDocumento(), getNomeAnexo(), getTextoAnexo(), getDataCriacao(), getDataAlteracao(), getNumeroVersao());
 	}
 	
 	@Override
 	public String toString() {
-		return "Capitulo{" +
-				"codigoCapitulo=" + codigoCapitulo +
+		return "Anexo{" +
+				"codigoAnexo=" + codigoAnexo +
 				", documento=" + documento +
-				", nomeCapitulo='" + nomeCapitulo + '\'' +
-				", textoCapitulo='" + textoCapitulo + '\'' +
-				", numeroOrdemCapitulo=" + numeroOrdemCapitulo +
+				", nomeAnexo='" + nomeAnexo + '\'' +
+				", textoAnexo='" + textoAnexo + '\'' +
 				", dataCriacao=" + dataCriacao +
 				", dataAlteracao=" + dataAlteracao +
 				", numeroVersao=" + numeroVersao +

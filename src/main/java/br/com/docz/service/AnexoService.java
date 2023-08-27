@@ -1,8 +1,7 @@
 package br.com.docz.service;
 
-import br.com.docz.model.entity.Capitulo;
-import br.com.docz.model.entity.Documento;
-import br.com.docz.model.repository.CapituloRepository;
+import br.com.docz.model.entity.Anexo;
+import br.com.docz.model.repository.AnexoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,44 +10,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CapituloService {
+public class AnexoService {
 	
 	@Autowired
-	private CapituloRepository capituloRepository;
-	
-	@Autowired
-	private DocumentoService documentoService;
-	
+	private AnexoRepository anexoRepository;
 
 	@Transactional
-	public Capitulo criar(Capitulo capitulo) {
-		var idDocumento = capitulo.getDocumento().getCodigoDocumento();
-		var documento = documentoService.listarPorId(idDocumento);
-		var capitulosPorDocumento = documento.get().getCapitulos();
-		var numeroOrdemCapituloPorDocumento = capitulosPorDocumento.size();
-		
-		capitulo.setNumeroOrdemCapitulo(numeroOrdemCapituloPorDocumento+1);
-		return capituloRepository.save(capitulo);
+	public Anexo criar(Anexo anexo) {
+		return anexoRepository.save(anexo);
 	}
 	
 	@Transactional
-	public List<Capitulo> listarTodos(Capitulo capitulo){
-		return capituloRepository.findAll();
+	public List<Anexo> listarTodos(Anexo anexo){
+		return anexoRepository.findAll();
 	}
 	
 	@Transactional
-	public Optional<Capitulo> listarPorId(Integer id) {
-		return capituloRepository.findById(id);
+	public Optional<Anexo> listarPorId(Integer id) {
+		return anexoRepository.findById(id);
 	}
 	
 	@Transactional
-	public Capitulo atualizar(Capitulo capitulo) {
-		// TODO: função para reorganizar capítulos.
-		return capituloRepository.save(capitulo);
+	public Anexo atualizar(Anexo anexo) {
+		return anexoRepository.save(anexo);
 	}
 	
 	@Transactional
 	public void deletar(Integer id) {
-		capituloRepository.deleteById(id);
+		anexoRepository.deleteById(id);
 	}
 }
