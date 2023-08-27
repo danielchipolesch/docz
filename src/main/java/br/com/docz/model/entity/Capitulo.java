@@ -20,7 +20,7 @@ public class Capitulo {
 	@Column(name = "cd_capitulo")
 	private Integer codigoCapitulo;
 	
-	@ManyToOne//(cascade = MERGE)
+	@ManyToOne
 	@JoinColumn(name = "cd_documento", updatable = false, nullable = false)
 	@JsonBackReference
 	private Documento documento;
@@ -32,7 +32,7 @@ public class Capitulo {
 	private String textoCapitulo;
 	
 	@Column(name = "nr_ordem_capitulo")
-	private Integer numeroOrdemCapitulo = 1;
+	private Integer numeroOrdemCapitulo;
 	
 	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp

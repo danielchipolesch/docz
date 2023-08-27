@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.domain.Sort;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -24,6 +25,7 @@ public class Documento {
 	
 	@OneToMany (mappedBy = "documento", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	@JsonManagedReference
+	@OrderBy("nr_ordem_capitulo ASC")
 	private List<Capitulo> capitulos = new ArrayList<>();
 	
 	@Column(name = "dt_criacao", updatable = false)

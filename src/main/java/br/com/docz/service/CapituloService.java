@@ -16,9 +16,14 @@ public class CapituloService {
 	@Autowired
 	private CapituloRepository capituloRepository;
 	
+	@Autowired
+	private DocumentoService documentoService;
+	
 
 	@Transactional
 	public Capitulo criar(Capitulo capitulo) {
+		var idDocumento = capitulo.getDocumento().getCodigoDocumento();
+		var capitulosDocumento = documentoService.listarPorId(idDocumento).get().getCapitulos();
 		return capituloRepository.save(capitulo);
 	}
 	
