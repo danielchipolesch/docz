@@ -28,6 +28,11 @@ public class Documento {
 	@OrderBy("nr_ordem_capitulo ASC")
 	private List<Capitulo> capitulos = new ArrayList<>();
 	
+	@OneToMany (mappedBy = "documento", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@JsonManagedReference
+	//@OrderBy("nr_ordem_capitulo ASC")
+	private List<Anexo> anexos = new ArrayList<>();
+	
 	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp
 	private Timestamp dataCriacao;
