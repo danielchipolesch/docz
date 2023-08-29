@@ -1,6 +1,8 @@
 package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +16,8 @@ import java.util.Objects;
 		columnNames = {"sg_especie", "nm_especie"}
       ))
 @DynamicUpdate
+@EqualsAndHashCode
+@ToString
 public class Especie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,24 +82,11 @@ public class Especie {
 		this.dataAlteracao = dataAlteracao;
 	}
 	
-	public Integer getNumeroversao() {
+	public Integer getNumeroVersao() {
 		return numeroVersao;
 	}
 	
-	public void setNumeroversao(Integer numeroVersao) {
+	public void setNumeroVersao(Integer numeroVersao) {
 		this.numeroVersao = numeroVersao;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Especie that = (Especie) o;
-		return Objects.equals(codigoEspecie, that.codigoEspecie) && Objects.equals(siglaEspecie, that.siglaEspecie) && Objects.equals(nomeEspecie, that.nomeEspecie) && Objects.equals(dataCriacao, that.dataCriacao) && Objects.equals(dataAlteracao, that.dataAlteracao) && Objects.equals(numeroVersao, that.numeroVersao);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoEspecie, siglaEspecie, nomeEspecie, dataCriacao, dataAlteracao, numeroVersao);
 	}
 }
