@@ -15,7 +15,7 @@ public class Prefacio {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_sumario")
+	@Column(name = "cd_prefacio")
 	private Integer codigoPrefacio;
 	
 	@Column(name = "tx_sumario")
