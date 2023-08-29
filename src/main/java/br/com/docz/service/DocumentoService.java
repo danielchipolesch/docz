@@ -1,14 +1,12 @@
 package br.com.docz.service;
 
-import br.com.docz.model.entity.Capitulo;
 import br.com.docz.model.entity.Documento;
+import br.com.docz.helper.StatusDocumento;
 import br.com.docz.model.repository.DocumentoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +18,7 @@ public class DocumentoService {
 
 	@Transactional
 	public Documento criar(Documento documento) {
+		documento.setStatusDocumento(StatusDocumento.RASCUNHO);
 		return documentoRepository.save(documento);
 	}
 	
