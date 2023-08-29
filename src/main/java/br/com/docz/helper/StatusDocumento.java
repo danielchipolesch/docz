@@ -1,4 +1,4 @@
-package br.com.docz.model.entity;
+package br.com.docz.helper;
 
 import jakarta.persistence.Entity;
 
