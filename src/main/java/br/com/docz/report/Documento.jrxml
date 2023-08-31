@@ -7,7 +7,15 @@
 		<![CDATA[]]>
 	</queryString>
 	<detail>
-		<part uuid="d3c21d64-341c-4db9-9fa3-28ba709abf73">
+		<part uuid="172bda4e-22e3-465d-abc8-b1e574f3c2ee">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Capa.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="f24845ce-0c0a-4141-88a2-43fca3254cbf">
 			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
 				<subreportParameter name="REPORT_CONNECTION">
 					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
@@ -15,12 +23,52 @@
 				<subreportExpression><![CDATA["src/main/java/br/com/report/Frontispicio.jasper"]]></subreportExpression>
 			</p:subreportPart>
 		</part>
-		<part uuid="21b0c20c-49ad-471d-97e9-e01997d05538">
+		<part uuid="1f24d919-cfb1-451b-9617-025082de07c7">
 			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
 				<subreportParameter name="REPORT_CONNECTION">
 					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportExpression><![CDATA["src/main/java/br/com/report/Portaria.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/AtoAprovacao.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="47189806-7ebe-4864-a4a8-2f487bf190ea">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Sumario.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="aa590f24-ae1b-4e9e-a8f9-d63ba122a138">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Prefacio.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="3253bb87-5a8a-4a15-a92e-357a6a63d121">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Texto.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="339bea90-d417-47fb-a142-940d87760bfc">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Referencia.jasper"]]></subreportExpression>
+			</p:subreportPart>
+		</part>
+		<part uuid="6bc3974c-49af-4487-8511-6582b76295de">
+			<p:subreportPart xmlns:p="http://jasperreports.sourceforge.net/jasperreports/parts" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/parts http://jasperreports.sourceforge.net/xsd/parts.xsd">
+				<subreportParameter name="REPORT_CONNECTION">
+					<subreportParameterExpression><![CDATA[$P{REPORT_CONNECTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["src/main/java/br/com/report/Anexo.jasper"]]></subreportExpression>
 			</p:subreportPart>
 		</part>
 	</detail>

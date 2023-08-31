@@ -57,6 +57,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+    		<groupId>net.sf.jasperreports</groupId>
+   			<artifactId>jasperreports</artifactId>
+    		<version>6.1.0</version>
+		</dependency>
 <!--		<dependency>&ndash;&gt;-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-docker-compose</artifactId>-->

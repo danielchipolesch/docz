@@ -40,7 +40,7 @@ public class AtoAprovacaoController {
 			return ResponseEntity.status(HttpStatus.CREATED).body(atoAprovacaoService.criar(atoAprovacaoModel));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
-		}		
+		}
 	}
 	
 	@GetMapping()

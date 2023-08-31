@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AtoAprovacao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e8f3c86-de15-4a1c-b298-95db9b29ca64">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nomeOrgao" class="br.com.docz.model.entity.Documento"/>
+	<field name="textoEmenta" class="br.com.docz.model.entity.AtoAprovacao"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="169" splitType="Stretch">
+			<image>
+				<reportElement x="255" y="0" width="50" height="50" uuid="0ea5c621-dde7-41d2-aaac-6d13c495931d"/>
+				<imageExpression><![CDATA["/src/main/java/br/com/docz/report/image/brasao-do-brasil-republica.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="160" y="55" width="260" height="20" uuid="7a124641-db8a-4be8-a639-75b2ddcb9c79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MINISTÉRIO DA DEFESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="74" width="260" height="20" uuid="2c01b0ca-8568-45f3-9ae3-68070f34fb2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMANDO DA AERONÁUTICA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="94" width="520" height="20" uuid="f3bc9834-a310-42b1-a736-326d406c7e01"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeOrgao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="70" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="0" width="240" height="60" uuid="57e88f2c-d530-4b26-a149-e5e297901132">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91865fb4-c034-41c5-97dc-d75192c1afdd"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{textoEmenta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
