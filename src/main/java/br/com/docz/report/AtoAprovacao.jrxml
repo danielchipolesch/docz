@@ -6,11 +6,14 @@
 	</queryString>
 	<field name="nomeOrgao" class="br.com.docz.model.entity.Documento"/>
 	<field name="textoEmenta" class="br.com.docz.model.entity.AtoAprovacao"/>
+	<field name="numeroPortaria" class="br.com.docz.model.entity.AtoAprovacao"/>
+	<field name="textoPortaria" class="br.com.docz.model.entity.AtoAprovacao"/>
+	<field name="nomeAutoridade" class="br.com.docz.model.entity.AtoAprovacao"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="169" splitType="Stretch">
+		<band height="140" splitType="Stretch">
 			<image>
 				<reportElement x="255" y="0" width="50" height="50" uuid="0ea5c621-dde7-41d2-aaac-6d13c495931d"/>
 				<imageExpression><![CDATA["/src/main/java/br/com/docz/report/image/brasao-do-brasil-republica.png"]]></imageExpression>
@@ -39,26 +42,45 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="70" splitType="Stretch"/>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="440" height="30" uuid="3018cab1-47d9-4de8-b3b5-f9540a0d4e27"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroPortaria}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="335" splitType="Stretch">
 			<textField>
-				<reportElement x="280" y="0" width="240" height="60" uuid="57e88f2c-d530-4b26-a149-e5e297901132">
+				<reportElement x="280" y="30" width="240" height="100" uuid="57e88f2c-d530-4b26-a149-e5e297901132">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91865fb4-c034-41c5-97dc-d75192c1afdd"/>
 				</reportElement>
 				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{textoEmenta}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="40" y="170" width="480" height="165" uuid="3fea43f8-b627-4dd7-acde-799148202dc6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b8cb6eb-0e4d-4002-824c-ccdefe0c84a2"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textoPortaria}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="95" splitType="Stretch">
+			<textField>
+				<reportElement x="280" y="37" width="240" height="30" uuid="925fec67-2bdf-4bb7-9eb0-c5f7cb0dda93"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeAutoridade}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
