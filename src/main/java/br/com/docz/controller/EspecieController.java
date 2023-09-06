@@ -22,7 +22,7 @@ public class EspecieController {
 	EspecieService especieService;
 	
 	@PostMapping()
-	public ResponseEntity<Object> criar (@RequestBody @Valid EspecieDto especieDto){
+	public ResponseEntity<Object> criar (@RequestBody EspecieDto especieDto){
 		try {
 			var especieModel = new Especie();
 			BeanUtils.copyProperties(especieDto, especieModel);
@@ -50,7 +50,7 @@ public class EspecieController {
 	
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
-	                                        @RequestBody @Valid EspecieDto especieDto){
+	                                        @RequestBody EspecieDto especieDto){
 		
 		Optional<Especie> especie = especieService.listarPorId(id);
 		

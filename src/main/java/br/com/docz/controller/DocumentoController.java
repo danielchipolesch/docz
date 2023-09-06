@@ -76,23 +76,22 @@ public class DocumentoController {
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
 	                                        @RequestBody @Valid DocumentoDto documentoDto){
 		
-//		var idEspecie = documentoDto.especie().getCodigoEspecie();
-//		Optional<Especie> especie = especieService.listarPorId(idEspecie);
-		
+		//var idEspecie = documentoDto.especie().getCodigoEspecie();
+		//Optional<Especie> especie = especieService.listarPorId(idEspecie);
 		Optional<Documento> documento = documentoService.listarPorId(id);
 		
-		if (documento.isEmpty()){
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DocumentoException.parameterNotNull());
+		if (documento.isPresent()){
+			try {
+				var documentoModel = documento.get();
+				BeanUtils.copyProperties(documentoDto, documentoModel);
+				//documentoModel.setEspecie(especie.get());
+				return ResponseEntity.status(HttpStatus.OK).body(documentoService.atualizar(documentoModel));
+			} catch (Exception e){
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
+			}
 		}
-		try {
-			var documentoModel = documento.get();
-			BeanUtils.copyProperties(documentoDto, documentoModel);
-			/* TODO
-			*  */
-			//documentoModel.setEspecie(especie.get());
-			return ResponseEntity.status(HttpStatus.OK).body(documentoService.atualizar(documentoModel));
-		} catch (Exception e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
+		else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DocumentoException.parameterNotNull());
 		}
 	}
 	
@@ -121,6 +120,7 @@ public class DocumentoController {
 		
 		var documentoPdf = documentoService.gerarPdf(id);
 
-		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(documentoPdf);
+//		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(documentoPdf);
+		return ResponseEntity.status(HttpStatus.OK).body(documentoPdf);
 	}
 }

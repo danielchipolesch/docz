@@ -28,7 +28,7 @@ import br.com.docz.model.entity.AtoAprovacao;
 public class AtoAprovacaoController {
 	
 	@Autowired
-	private AtoAprovacaoService atoAprovacaoService;
+	AtoAprovacaoService atoAprovacaoService;
 	
 	private String atoAprovacaoConst = "Ato de aprovacão"; 
 	

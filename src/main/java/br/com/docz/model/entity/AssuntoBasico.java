@@ -2,8 +2,6 @@ package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,8 +16,6 @@ import java.sql.Timestamp;
 		columnNames = {"nm_assunto_basico", "nr_assunto_basico"}
 ))
 @DynamicUpdate
-@Getter
-@Setter
 @EqualsAndHashCode
 @ToString
 public class AssuntoBasico {
@@ -45,5 +41,53 @@ public class AssuntoBasico {
 	
 	@Column(name = "nr_versao")
 	@Version
-	private Integer numeroVersao;	
+	private Integer numeroVersao;
+	
+	public Integer getCodigoAssuntoBasico() {
+		return codigoAssuntoBasico;
+	}
+	
+	public void setCodigoAssuntoBasico(Integer codigoAssuntoBasico) {
+		this.codigoAssuntoBasico = codigoAssuntoBasico;
+	}
+	
+	public String getNomeAssuntoBasico() {
+		return nomeAssuntoBasico;
+	}
+	
+	public void setNomeAssuntoBasico(String nomeAssuntoBasico) {
+		this.nomeAssuntoBasico = nomeAssuntoBasico;
+	}
+	
+	public String getNumeroAssuntoBasico() {
+		return numeroAssuntoBasico;
+	}
+	
+	public void setNumeroAssuntoBasico(String numeroAssuntoBasico) {
+		this.numeroAssuntoBasico = numeroAssuntoBasico;
+	}
+	
+	public Timestamp getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Timestamp dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Timestamp getDataAlteracao() {
+		return dataAlteracao;
+	}
+	
+	public void setDataAlteracao(Timestamp dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
+	public Integer getNumeroVersao() {
+		return numeroVersao;
+	}
+	
+	public void setNumeroVersao(Integer numeroVersao) {
+		this.numeroVersao = numeroVersao;
+	}
 }

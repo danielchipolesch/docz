@@ -2,8 +2,6 @@ package br.com.docz.model.entity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,8 +13,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "t_prefacio")
 @DynamicUpdate
-@Getter
-@Setter
 @EqualsAndHashCode
 @ToString
 public class Prefacio {
@@ -40,4 +36,44 @@ public class Prefacio {
 	@Column(name = "nr_versao")
 	@Version
 	private Integer numeroVersao;
+	
+	public Integer getCodigoPrefacio() {
+		return codigoPrefacio;
+	}
+	
+	public void setCodigoPrefacio(Integer codigoPrefacio) {
+		this.codigoPrefacio = codigoPrefacio;
+	}
+	
+	public String getTextoPrefacio() {
+		return textoPrefacio;
+	}
+	
+	public void setTextoPrefacio(String textoPrefacio) {
+		this.textoPrefacio = textoPrefacio;
+	}
+	
+	public Timestamp getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Timestamp dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Timestamp getDataAlteracao() {
+		return dataAlteracao;
+	}
+	
+	public void setDataAlteracao(Timestamp dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
+	public Integer getNumeroVersao() {
+		return numeroVersao;
+	}
+	
+	public void setNumeroVersao(Integer numeroVersao) {
+		this.numeroVersao = numeroVersao;
+	}
 }

@@ -27,7 +27,7 @@ public class CapituloService {
 		var documento = documentoService.listarPorId(idDocumento);
 		var capitulosPorDocumento = documento.get().getCapitulos();
 		var numeroOrdemCapituloPorDocumento = capitulosPorDocumento.size();
-		
+
 		capitulo.setNumeroOrdemCapitulo(numeroOrdemCapituloPorDocumento+1);
 		return capituloRepository.save(capitulo);
 	}

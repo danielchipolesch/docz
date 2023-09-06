@@ -3,8 +3,6 @@ package br.com.docz.model.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,8 +13,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "t_anexo")
 @DynamicUpdate
-@Getter
-@Setter
 @EqualsAndHashCode
 @ToString
 public class Anexo {
@@ -48,4 +44,60 @@ public class Anexo {
 	@Column(name = "nr_versao")
 	@Version
 	private Integer numeroVersao;
+	
+	public Integer getCodigoAnexo() {
+		return codigoAnexo;
+	}
+	
+	public void setCodigoAnexo(Integer codigoAnexo) {
+		this.codigoAnexo = codigoAnexo;
+	}
+	
+	public Documento getDocumento() {
+		return documento;
+	}
+	
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
+	}
+	
+	public String getNomeAnexo() {
+		return nomeAnexo;
+	}
+	
+	public void setNomeAnexo(String nomeAnexo) {
+		this.nomeAnexo = nomeAnexo;
+	}
+	
+	public String getTextoAnexo() {
+		return textoAnexo;
+	}
+	
+	public void setTextoAnexo(String textoAnexo) {
+		this.textoAnexo = textoAnexo;
+	}
+	
+	public Timestamp getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Timestamp dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Timestamp getDataAlteracao() {
+		return dataAlteracao;
+	}
+	
+	public void setDataAlteracao(Timestamp dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
+	public Integer getNumeroVersao() {
+		return numeroVersao;
+	}
+	
+	public void setNumeroVersao(Integer numeroVersao) {
+		this.numeroVersao = numeroVersao;
+	}
 }

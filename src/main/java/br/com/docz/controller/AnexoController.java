@@ -31,14 +31,14 @@ public class AnexoController {
 	public ResponseEntity<Object> criar (@RequestBody @Valid AnexoDto anexoDto){
 		
 		var id = anexoDto.documento().getCodigoDocumento();
-		Optional<Documento> documento = documentoService.listarPorId(id);
+		Documento documento = documentoService.listarPorId(id).get();
 		
-		if (documento.isPresent()){
+		if (documento != null){
 		
 			try {
 				var anexoModel = new Anexo();
 				BeanUtils.copyProperties(anexoDto, anexoModel);
-				anexoModel.setDocumento(documento.get());
+				anexoModel.setDocumento(documento);
 				return ResponseEntity.status(HttpStatus.CREATED).body(anexoService.criar(anexoModel));
 			
 			} catch (Exception e) {

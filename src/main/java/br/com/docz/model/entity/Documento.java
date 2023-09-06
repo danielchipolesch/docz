@@ -3,10 +3,7 @@ import br.com.docz.helper.StatusDocumento;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,8 +14,6 @@ import java.util.*;
 @Entity
 @Table(name = "t_documento")
 @DynamicUpdate
-@Getter
-@Setter
 @EqualsAndHashCode
 @ToString
 public class Documento {
@@ -84,4 +79,132 @@ public class Documento {
 	@Column(name = "nr_versao")
 	@Version
 	private Integer numeroVersao;
+	
+	public Integer getCodigoDocumento() {
+		return codigoDocumento;
+	}
+	
+	public void setCodigoDocumento(Integer codigoDocumento) {
+		this.codigoDocumento = codigoDocumento;
+	}
+	
+	public String getNomeOrgao() {
+		return nomeOrgao;
+	}
+	
+	public void setNomeOrgao(String nomeOrgao) {
+		this.nomeOrgao = nomeOrgao;
+	}
+	
+	public Especie getEspecie() {
+		return especie;
+	}
+	
+	public void setEspecie(Especie especie) {
+		this.especie = especie;
+	}
+	
+	public AssuntoBasico getAssuntoBasico() {
+		return assuntoBasico;
+	}
+	
+	public void setAssuntoBasico(AssuntoBasico assuntoBasico) {
+		this.assuntoBasico = assuntoBasico;
+	}
+	
+	public String getNomeEpigrafeDocumento() {
+		return nomeEpigrafeDocumento;
+	}
+	
+	public void setNomeEpigrafeDocumento(String nomeEpigrafeDocumento) {
+		this.nomeEpigrafeDocumento = nomeEpigrafeDocumento;
+	}
+	
+	public Integer getNumeroSecundarioAssuntoBasico() {
+		return numeroSecundarioAssuntoBasico;
+	}
+	
+	public void setNumeroSecundarioAssuntoBasico(Integer numeroSecundarioAssuntoBasico) {
+		this.numeroSecundarioAssuntoBasico = numeroSecundarioAssuntoBasico;
+	}
+	
+	public AtoAprovacao getAtoAprovacao() {
+		return atoAprovacao;
+	}
+	
+	public void setAtoAprovacao(AtoAprovacao atoAprovacao) {
+		this.atoAprovacao = atoAprovacao;
+	}
+	
+	public Sumario getSumario() {
+		return sumario;
+	}
+	
+	public void setSumario(Sumario sumario) {
+		this.sumario = sumario;
+	}
+	
+	public Prefacio getPrefacio() {
+		return prefacio;
+	}
+	
+	public void setPrefacio(Prefacio prefacio) {
+		this.prefacio = prefacio;
+	}
+	
+	public List<Capitulo> getCapitulos() {
+		return capitulos;
+	}
+	
+	public void setCapitulos(List<Capitulo> capitulos) {
+		this.capitulos = capitulos;
+	}
+	
+	public Referencia getReferencia() {
+		return referencia;
+	}
+	
+	public void setReferencia(Referencia referencia) {
+		this.referencia = referencia;
+	}
+	
+	public List<Anexo> getAnexos() {
+		return anexos;
+	}
+	
+	public void setAnexos(List<Anexo> anexos) {
+		this.anexos = anexos;
+	}
+	
+	public StatusDocumento getStatusDocumento() {
+		return statusDocumento;
+	}
+	
+	public void setStatusDocumento(StatusDocumento statusDocumento) {
+		this.statusDocumento = statusDocumento;
+	}
+	
+	public Timestamp getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Timestamp dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Timestamp getDataAlteracao() {
+		return dataAlteracao;
+	}
+	
+	public void setDataAlteracao(Timestamp dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
+	
+	public Integer getNumeroVersao() {
+		return numeroVersao;
+	}
+	
+	public void setNumeroVersao(Integer numeroVersao) {
+		this.numeroVersao = numeroVersao;
+	}
 }

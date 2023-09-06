@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -28,17 +29,17 @@ public class CapituloController {
 	DocumentoService documentoService;
 	
 	@PostMapping()
-	public ResponseEntity<Object> criar (@RequestBody @Valid CapituloDto capituloDto){
+	public ResponseEntity<Object> criar (@RequestBody @Valid CapituloDto capituloDto) {
 		
 		var id = capituloDto.documento().getCodigoDocumento();
-		Optional<Documento> documento = documentoService.listarPorId(id);
+		Documento documento = documentoService.listarPorId(id).get();
 		
-		if (documento.isPresent()){
+		if (documento != null){
 		
 			try {
 				var capituloModel = new Capitulo();
 				BeanUtils.copyProperties(capituloDto, capituloModel);
-				capituloModel.setDocumento(documento.get());
+				capituloModel.setDocumento(documento);
 				return ResponseEntity.status(HttpStatus.CREATED).body(capituloService.criar(capituloModel));
 			
 			} catch (Exception e) {

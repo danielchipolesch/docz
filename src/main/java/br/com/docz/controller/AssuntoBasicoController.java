@@ -59,18 +59,20 @@ public class AssuntoBasicoController {
 		
 		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(id);
 		
-		if (assuntoBasico.isEmpty()){
+		if (assuntoBasico.isPresent()){
+			var assuntoBasicoModel = assuntoBasico.get();
+			
+			try {
+				BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
+				return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.atualizar(assuntoBasicoModel));
+			} catch (RuntimeException runtimeException) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
+			}
+		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AssuntoBasicoException.objectNotFound());
 		}
 		
-		var assuntoBasicoModel = assuntoBasico.get();
 		
-		try {
-			BeanUtils.copyProperties(assuntoBasicoDto, assuntoBasicoModel);
-			return ResponseEntity.status(HttpStatus.OK).body(assuntoBasicoService.atualizar(assuntoBasicoModel));
-		} catch (RuntimeException runtimeException) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
-		}
 	}
 	
 	
