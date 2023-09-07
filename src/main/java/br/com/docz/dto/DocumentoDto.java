@@ -6,7 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record DocumentoDto(@NotBlank String nomeOrgao,
+                           @NotNull
                            Especie especie,
+                           @NotNull
                            AssuntoBasico assuntoBasico,
                            @NotBlank String nomeEpigrafeDocumento,
                            @NotNull Integer numeroSecundarioAssuntoBasico,
