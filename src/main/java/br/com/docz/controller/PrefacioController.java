@@ -23,16 +23,16 @@ public class PrefacioController {
 	
 	private String prefacioConst = "Prefácio";
 	
-	@PostMapping()
-	public ResponseEntity<Object> criar(@RequestBody PrefacioDto prefacioDto){
-		try {
-			var prefacioModel = new Prefacio();
-			BeanUtils.copyProperties(prefacioDto, prefacioModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(prefacioService.criar(prefacioModel));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
-		}		
-	}
+//	@PostMapping()
+//	public ResponseEntity<Object> criar(@RequestBody PrefacioDto prefacioDto){
+//		try {
+//			var prefacioModel = new Prefacio();
+//			BeanUtils.copyProperties(prefacioDto, prefacioModel);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(prefacioService.criar());
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
+//		}
+//	}
 	
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(PrefacioDto prefacioDto){

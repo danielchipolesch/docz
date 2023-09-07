@@ -16,7 +16,9 @@ public class ReferenciaService {
 	private ReferenciaRepository referenciaRepository;
 
 	@Transactional
-	public Referencia criar(Referencia referencia) {
+	public Referencia criar() {
+		Referencia referencia = new Referencia();
+		referencia.setTextoReferencia("Este é um exemplo de texto para as Referências. Altere este texto.");
 		return referenciaRepository.save(referencia);
 	}
 	

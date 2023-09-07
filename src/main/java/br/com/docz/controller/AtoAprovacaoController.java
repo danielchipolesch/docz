@@ -32,16 +32,16 @@ public class AtoAprovacaoController {
 	
 	private String atoAprovacaoConst = "Ato de aprovacão"; 
 	
-	@PostMapping()
-	public ResponseEntity<Object> criar(@RequestBody AtoAprovacaoDto atoAprovacaoDto){
-		try {
-			var atoAprovacaoModel = new AtoAprovacao();
-			BeanUtils.copyProperties(atoAprovacaoDto, atoAprovacaoModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(atoAprovacaoService.criar(atoAprovacaoModel));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
-		}
-	}
+//	@PostMapping()
+//	public ResponseEntity<Object> criar(@RequestBody AtoAprovacaoDto atoAprovacaoDto){
+//		try {
+//			var atoAprovacaoModel = new AtoAprovacao();
+//			BeanUtils.copyProperties(atoAprovacaoDto, atoAprovacaoModel);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(atoAprovacaoService.criar());
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
+//		}
+//	}
 	
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(AtoAprovacaoDto atoAprovacaoDto){

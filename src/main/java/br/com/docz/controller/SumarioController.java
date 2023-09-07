@@ -32,16 +32,16 @@ public class SumarioController {
 	
 	private String sumarioConst = "Sumário"; 
 	
-	@PostMapping()
-	public ResponseEntity<Object> criar(@RequestBody SumarioDto sumarioDto){
-		try {
-			var sumarioModel = new Sumario();
-			BeanUtils.copyProperties(sumarioDto, sumarioModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(sumarioService.criar(sumarioModel));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
-		}		
-	}
+//	@PostMapping()
+//	public ResponseEntity<Object> criar(@RequestBody SumarioDto sumarioDto){
+//		try {
+//			var sumarioModel = new Sumario();
+//			BeanUtils.copyProperties(sumarioDto, sumarioModel);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(sumarioService.criar());
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
+//		}
+//	}
 	
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(SumarioDto sumarioDto){

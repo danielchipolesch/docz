@@ -1,5 +1,6 @@
 package br.com.docz.service;
 
+import br.com.docz.model.entity.AtoAprovacao;
 import br.com.docz.model.entity.Documento;
 import br.com.docz.helper.StatusDocumento;
 import br.com.docz.model.repository.DocumentoRepository;
@@ -20,9 +21,24 @@ public class DocumentoService {
 	@Autowired
 	private DocumentoRepository documentoRepository;
 	
+	@Autowired
+	private AtoAprovacaoService atoAprovacaoService;
+	
+	@Autowired
+	private SumarioService sumarioService;
+	
+	@Autowired
+	private PrefacioService prefacioService;
+	
+	@Autowired
+	private ReferenciaService referenciaService;
 
 	@Transactional
 	public Documento criar(Documento documento) {
+		documento.setAtoAprovacao(atoAprovacaoService.criar());
+		documento.setSumario(sumarioService.criar());
+		documento.setPrefacio(prefacioService.criar());
+		documento.setReferencia(referenciaService.criar());
 		documento.setStatusDocumento(StatusDocumento.RASCUNHO);
 		return documentoRepository.save(documento);
 	}

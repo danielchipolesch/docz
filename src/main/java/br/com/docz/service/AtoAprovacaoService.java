@@ -17,7 +17,12 @@ public class AtoAprovacaoService {
 	private AtoAprovacaoRepository atoAprovacaoRepository;
 
 	@Transactional
-	public AtoAprovacao criar(AtoAprovacao atoAprovacao) {
+	public AtoAprovacao criar() {
+		AtoAprovacao atoAprovacao = new AtoAprovacao();
+		atoAprovacao.setNumeroPortaria("Exemplo: Portaria n° 123/PP5-1, de 23 de agosto de 2023");
+		atoAprovacao.setTextoEmenta("Aprova a edição da ICA XYZ-W [...]");
+		atoAprovacao.setTextoPortaria("O Diretor de Administração da Aeronáutica, no uso das atribuições que lhe conferem o art.5°, do [...]");
+		atoAprovacao.setNomeAutoridade("Maj Brig Int FULANO DE TAL");
 		return atoAprovacaoRepository.save(atoAprovacao);
 	}
 	

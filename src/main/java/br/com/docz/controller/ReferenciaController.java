@@ -21,16 +21,16 @@ public class ReferenciaController {
 	@Autowired
 	ReferenciaService referenciaService;
 	
-	@PostMapping()
-	public ResponseEntity<Object> criar (@RequestBody @Valid ReferenciaDto referenciaDto){
-		try {
-			var referenciaModel = new Referencia();
-			BeanUtils.copyProperties(referenciaDto, referenciaModel);
-			return ResponseEntity.status(HttpStatus.CREATED).body(referenciaService.criar(referenciaModel));
-		} catch (RuntimeException runtimeException){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
-		}
-	}
+//	@PostMapping()
+//	public ResponseEntity<Object> criar (@RequestBody @Valid ReferenciaDto referenciaDto){
+//		try {
+//			var referenciaModel = new Referencia();
+//			BeanUtils.copyProperties(referenciaDto, referenciaModel);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(referenciaService.criar());
+//		} catch (RuntimeException runtimeException){
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
+//		}
+//	}
 	@GetMapping()
 	public ResponseEntity<Object> listarTodos(ReferenciaDto referenciaDto){
 		try {

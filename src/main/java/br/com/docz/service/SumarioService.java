@@ -16,7 +16,9 @@ public class SumarioService {
 	private SumarioRepository sumarioRepository;
 
 	@Transactional
-	public Sumario criar(Sumario sumario) {
+	public Sumario criar() {
+		Sumario sumario = new Sumario();
+		sumario.setTextoSumario("Este é um exemplo de texto para o sumário. Altere este texto.");
 		return sumarioRepository.save(sumario);
 	}
 	

@@ -16,7 +16,9 @@ public class PrefacioService {
 	private PrefacioRepository prefacioRepository;
 
 	@Transactional
-	public Prefacio criar(Prefacio prefacio) {
+	public Prefacio criar() {
+		Prefacio prefacio = new Prefacio();
+		prefacio.setTextoPrefacio("Este é um exemplo de texto para o Prefácio. Altere este texto.");
 		return prefacioRepository.save(prefacio);
 	}
 	
