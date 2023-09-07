@@ -10,13 +10,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "t_especie", uniqueConstraints = @UniqueConstraint(
+@Table(name = "t_especie",
+		uniqueConstraints = @UniqueConstraint(
 		name = "uk_sigla_nome_especie",
-		columnNames = {"sg_especie", "nm_especie"}
-      ))
+		columnNames = {"sg_especie", "nm_especie"})
+	  )
 @DynamicUpdate
-//@Getter
-//@Setter
 @EqualsAndHashCode
 @ToString
 public class Especie {
