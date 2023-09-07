@@ -60,9 +60,18 @@ public class DocumentoController {
 	
 	@PostMapping()
 	public ResponseEntity<Object> criar (@RequestBody @Valid DocumentoDto documentoDto){
+		
+		var idEspecie = documentoDto.especie().getCodigoEspecie();
+		var idAssuntoBasico = documentoDto.assuntoBasico().getCodigoAssuntoBasico();
+		
+		Optional<Especie> especie = especieService.listarPorId(idEspecie);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(idAssuntoBasico);
+		
 		try {
 			var documentoModel = new Documento();
 			BeanUtils.copyProperties(documentoDto, documentoModel);
+			documentoModel.setEspecie(especie.get());
+			documentoModel.setAssuntoBasico(assuntoBasico.get());
 			return ResponseEntity.status(HttpStatus.CREATED).body(documentoService.criar(documentoModel));
 		} catch (RuntimeException runtimeException){
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getCause().getCause().getMessage());
