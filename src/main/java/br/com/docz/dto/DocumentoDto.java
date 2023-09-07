@@ -14,5 +14,4 @@ public record DocumentoDto(@NotBlank String nomeOrgao,
                            Sumario sumario,
                            Prefacio prefacio,
                            Referencia referencia) {
-
 }

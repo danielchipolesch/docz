@@ -2,10 +2,8 @@ package br.com.docz.controller;
 
 import br.com.docz.dto.DocumentoDto;
 import br.com.docz.exception.DocumentoException;
-import br.com.docz.model.entity.Documento;
-import br.com.docz.model.entity.Especie;
-import br.com.docz.service.DocumentoService;
-import br.com.docz.service.EspecieService;
+import br.com.docz.model.entity.*;
+import br.com.docz.service.*;
 import jakarta.validation.Valid;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -40,10 +38,25 @@ import java.util.Optional;
 public class DocumentoController {
 	
 	@Autowired
-	DocumentoService documentoService;
+	private DocumentoService documentoService;
 	
 	@Autowired
-	EspecieService especieService;
+	private EspecieService especieService;
+	
+	@Autowired
+	private AssuntoBasicoService assuntoBasicoService;
+	
+	@Autowired
+	private AtoAprovacaoService atoAprovacaoService;
+	
+	@Autowired
+	private SumarioService sumarioService;
+	
+	@Autowired
+	private PrefacioService prefacioService;
+	
+	@Autowired
+	private ReferenciaService referenciaService;
 	
 	@PostMapping()
 	public ResponseEntity<Object> criar (@RequestBody @Valid DocumentoDto documentoDto){
@@ -76,15 +89,36 @@ public class DocumentoController {
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
 	                                        @RequestBody @Valid DocumentoDto documentoDto){
 		
-		//var idEspecie = documentoDto.especie().getCodigoEspecie();
-		//Optional<Especie> especie = especieService.listarPorId(idEspecie);
+		var idEspecie = documentoDto.especie().getCodigoEspecie();
+		var idAssuntoBasico = documentoDto.assuntoBasico().getCodigoAssuntoBasico();
+		var idAtoAprovacao = documentoDto.atoAprovacao().getCodigoAtoAprovacao();
+		var idSumario = documentoDto.sumario().getCodigoSumario();
+		var idPrefacio = documentoDto.prefacio().getCodigoPrefacio();
+		var idReferencia = documentoDto.referencia().getCodigoReferencia();
+		
+		
+		Optional<Especie> especie = especieService.listarPorId(idEspecie);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(idAssuntoBasico);
+		Optional<AtoAprovacao> atoAprovacao = atoAprovacaoService.listarPorId(idAtoAprovacao);
+		Optional<Sumario> sumario = sumarioService.listarPorId(idSumario);
+		Optional<Prefacio> prefacio = prefacioService.listarPorId(idPrefacio);
+		Optional<Referencia> referencia = referenciaService.listarPorId(idReferencia);
+		
+		
 		Optional<Documento> documento = documentoService.listarPorId(id);
+		
+		
 		
 		if (documento.isPresent()){
 			try {
 				var documentoModel = documento.get();
 				BeanUtils.copyProperties(documentoDto, documentoModel);
-				//documentoModel.setEspecie(especie.get());
+				documentoModel.setEspecie(especie.get());
+				documentoModel.setAssuntoBasico(assuntoBasico.get());
+				documentoModel.setAtoAprovacao(atoAprovacao.get());
+				documentoModel.setSumario(sumario.get());
+				documentoModel.setPrefacio(prefacio.get());
+				documentoModel.setReferencia(referencia.get());
 				return ResponseEntity.status(HttpStatus.OK).body(documentoService.atualizar(documentoModel));
 			} catch (Exception e){
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getCause().getCause().getMessage());
