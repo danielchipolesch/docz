@@ -26,11 +26,11 @@ public class Documento {
 	@Column(name = "nm_orgao")
 	private String nomeOrgao;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_especie"))
 	private Especie especie;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_assunto_basico"))
 	private AssuntoBasico assuntoBasico;
 	
