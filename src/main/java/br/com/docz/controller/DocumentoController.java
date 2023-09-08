@@ -61,11 +61,15 @@ public class DocumentoController {
 	@PostMapping()
 	public ResponseEntity<Object> criar (@RequestBody @Valid DocumentoDto documentoDto){
 		
-		var idEspecie = documentoDto.especie().getCodigoEspecie();
-		var idAssuntoBasico = documentoDto.assuntoBasico().getCodigoAssuntoBasico();
+		Optional<Especie> especie = especieService.listarPorId(documentoDto.especie().getCodigoEspecie());
+		if (especie.isEmpty()){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Espécie não encontrada");
+		}
 		
-		Optional<Especie> especie = especieService.listarPorId(idEspecie);
-		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(idAssuntoBasico);
+		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(documentoDto.assuntoBasico().getCodigoAssuntoBasico());
+		if (assuntoBasico.isEmpty()){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não encontrado");
+		}
 		
 		try {
 			var documentoModel = new Documento();
@@ -98,30 +102,45 @@ public class DocumentoController {
 	public ResponseEntity<Object> atualizar(@PathVariable(value = "id") Integer id,
 	                                        @RequestBody @Valid DocumentoDto documentoDto){
 		
-		var idEspecie = documentoDto.especie().getCodigoEspecie();
-		var idAssuntoBasico = documentoDto.assuntoBasico().getCodigoAssuntoBasico();
-		var idAtoAprovacao = documentoDto.atoAprovacao().getCodigoAtoAprovacao();
-		var idSumario = documentoDto.sumario().getCodigoSumario();
-		var idPrefacio = documentoDto.prefacio().getCodigoPrefacio();
-		var idReferencia = documentoDto.referencia().getCodigoReferencia();
-		
-		
-		Optional<Especie> especie = especieService.listarPorId(idEspecie);
-		Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(idAssuntoBasico);
-		Optional<AtoAprovacao> atoAprovacao = atoAprovacaoService.listarPorId(idAtoAprovacao);
-		Optional<Sumario> sumario = sumarioService.listarPorId(idSumario);
-		Optional<Prefacio> prefacio = prefacioService.listarPorId(idPrefacio);
-		Optional<Referencia> referencia = referenciaService.listarPorId(idReferencia);
-		
-		
 		Optional<Documento> documento = documentoService.listarPorId(id);
 		
-		
-		
 		if (documento.isPresent()){
+			
 			try {
+				
+				Optional<Especie> especie = especieService.listarPorId(documentoDto.especie().getCodigoEspecie());
+				if (especie.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Espécie não encontrada");
+				}
+				
+				Optional<AssuntoBasico> assuntoBasico = assuntoBasicoService.listarPorId(documentoDto.assuntoBasico().getCodigoAssuntoBasico());
+				if (assuntoBasico.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Assunto básico não encontrado");
+				}
+				
+				Optional<AtoAprovacao> atoAprovacao = atoAprovacaoService.listarPorId(documentoDto.atoAprovacao().getCodigoAtoAprovacao());
+				if (atoAprovacao.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ato de aprovação não encontrado");
+				}
+				
+				Optional<Sumario> sumario = sumarioService.listarPorId(documentoDto.sumario().getCodigoSumario());
+				if (sumario.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sumário não encontrado");
+				}
+				
+				Optional<Prefacio> prefacio = prefacioService.listarPorId(documentoDto.prefacio().getCodigoPrefacio());
+				if (prefacio.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Prefácio não encontrado");
+				}
+				
+				Optional<Referencia> referencia = referenciaService.listarPorId(documentoDto.referencia().getCodigoReferencia());
+				if (referencia.isEmpty()){
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Referência não encontrada");
+				}
+				
 				var documentoModel = documento.get();
 				BeanUtils.copyProperties(documentoDto, documentoModel);
+				
 				documentoModel.setEspecie(especie.get());
 				documentoModel.setAssuntoBasico(assuntoBasico.get());
 				documentoModel.setAtoAprovacao(atoAprovacao.get());
