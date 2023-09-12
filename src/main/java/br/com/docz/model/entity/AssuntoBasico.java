@@ -30,7 +30,7 @@ public class AssuntoBasico {
 	private String nomeAssuntoBasico;
 	
 	@Column(name = "nr_assunto_basico", nullable = false)
-	private String numeroAssuntoBasico;
+	private Integer numeroAssuntoBasico;
 	
 	@Column(name = "dt_criacao", updatable = false)
 	@CreationTimestamp
@@ -60,11 +60,11 @@ public class AssuntoBasico {
 		this.nomeAssuntoBasico = nomeAssuntoBasico;
 	}
 	
-	public String getNumeroAssuntoBasico() {
+	public Integer getNumeroAssuntoBasico() {
 		return numeroAssuntoBasico;
 	}
 	
-	public void setNumeroAssuntoBasico(String numeroAssuntoBasico) {
+	public void setNumeroAssuntoBasico(Integer numeroAssuntoBasico) {
 		this.numeroAssuntoBasico = numeroAssuntoBasico;
 	}
 	

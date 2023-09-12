@@ -1,17 +1,21 @@
 package br.com.docz.service;
 
-import br.com.docz.model.entity.AtoAprovacao;
+
 import br.com.docz.model.entity.Documento;
 import br.com.docz.helper.StatusDocumento;
+import br.com.docz.model.repository.AssuntoBasicoRepository;
 import br.com.docz.model.repository.DocumentoRepository;
 import jakarta.transaction.Transactional;
-import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.*;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +36,9 @@ public class DocumentoService {
 	
 	@Autowired
 	private ReferenciaService referenciaService;
+	
+	@Autowired
+	private AssuntoBasicoRepository assuntoBasicoRepository;
 
 	@Transactional
 	public Documento criar(Documento documento) {
@@ -63,19 +70,24 @@ public class DocumentoService {
 		documentoRepository.deleteById(id);
 	}
 	
-	public ArrayList<Optional<Documento>> gerarPdf(Integer id) throws FileNotFoundException, JRException {
+	public byte[] gerarPdf(Integer id) throws FileNotFoundException, JRException {
 		
-		Optional<Documento> documento = documentoRepository.findById(id);
+
+		Documento documento = documentoRepository.findById(id).get();
+		List<Documento> documentoList = new ArrayList<>();
+		documentoList.add(documento);
+	
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documentoList);
 		
-		ArrayList<Optional<Documento>> listaDocumento = new ArrayList<>();
-		listaDocumento.add(documento);
-//		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(listaDocumento);
-//		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/java/br/com/docz/report/Documento.jrxml"));
-//		HashMap<String, Object> map = new HashMap<>();
-//		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
-//		//JasperPrint report = JasperExportManager.exportReportToPdfFile(beanCollectionDataSource, "documento.pdf");
-//		byte[] data = JasperExportManager.exportReportToPdf(report);
+		HashMap<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("nomeEpigrafeDocumento", documento.getNomeEpigrafeDocumento());
+		parameters.put("nomeOrgao", documento.getNomeOrgao());
+		String path = "src/main/resources/templates/";
 		
-		return listaDocumento;
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream(path+"/Documento.jrxml"));		
+//		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(documentoList));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+		
+		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}
 }

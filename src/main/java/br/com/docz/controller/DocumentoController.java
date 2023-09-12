@@ -6,15 +6,7 @@ import br.com.docz.model.entity.*;
 import br.com.docz.service.*;
 import jakarta.validation.Valid;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRAbstractBeanDataSource;
-import net.sf.jasperreports.engine.data.JRAbstractBeanDataSourceProvider;
-import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.nio.channels.FileLockInterruptionException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -107,7 +95,6 @@ public class DocumentoController {
 		if (documento.isPresent()){
 			
 			try {
-				
 				Optional<Especie> especie = especieService.listarPorId(documentoDto.especie().getCodigoEspecie());
 				if (especie.isEmpty()){
 					return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Espécie não encontrada");
@@ -173,16 +160,16 @@ public class DocumentoController {
 	}
 	
 	@GetMapping("/{id}/pdf")
-	public ResponseEntity<Object> generatePdf(@PathVariable(value = "id") Integer id) throws FileNotFoundException, JRException {
+	public ResponseEntity<byte[]> generatePdf(@PathVariable(value = "id") Integer id) throws FileNotFoundException, JRException {
 		
 		Optional<Documento> documento = documentoService.listarPorId(id);
-		if (documento.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DocumentoException.objectNotFound());
-		}
+//		if (documento.isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(DocumentoException.objectNotFound());
+//		}
 		
 		var documentoPdf = documentoService.gerarPdf(id);
 
-//		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(documentoPdf);
-		return ResponseEntity.status(HttpStatus.OK).body(documentoPdf);
+
+		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_PDF).body(documentoPdf);
 	}
 }
