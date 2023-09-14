@@ -24,10 +24,10 @@ public class Especie {
 	@Column(name = "cd_especie")
 	private Integer codigoEspecie;
 	
-	@Column(name = "sg_especie", nullable = false)
+	@Column(name = "sg_especie", nullable = false, length = 10)
 	private String siglaEspecie;
 	
-	@Column(name = "nm_especie", nullable = false)
+	@Column(name = "nm_especie", nullable = false, length = 75)
 	private String nomeEspecie;
 	
 	@Column(name = "dt_criacao", updatable = false)
