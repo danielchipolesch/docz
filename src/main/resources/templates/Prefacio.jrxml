@@ -5,28 +5,33 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="textoPrefacio" class="br.com.docz.model.entity.Prefacio"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="9" width="100" height="30" uuid="ba53583e-2a0a-4e11-98b1-f9dc2e3364bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFÁCIO]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="530" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="5" width="515" height="525" uuid="d6f2cfd2-9166-45c9-8d7e-9311c9098629"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textoPrefacio}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

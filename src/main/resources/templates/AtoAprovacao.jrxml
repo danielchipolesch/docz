@@ -58,7 +58,9 @@
 				<reportElement x="280" y="30" width="240" height="100" uuid="57e88f2c-d530-4b26-a149-e5e297901132">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91865fb4-c034-41c5-97dc-d75192c1afdd"/>
 				</reportElement>
-				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{textoEmenta}]]></textFieldExpression>
 			</textField>
 			<textField>

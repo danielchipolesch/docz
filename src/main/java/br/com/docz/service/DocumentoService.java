@@ -71,7 +71,6 @@ public class DocumentoService {
 	}
 	
 	public byte[] gerarPdf(Integer id) throws FileNotFoundException, JRException {
-		
 
 		Documento documento = documentoRepository.findById(id).get();
 		List<Documento> documentoList = new ArrayList<>();
@@ -84,9 +83,9 @@ public class DocumentoService {
 		parameters.put("nomeOrgao", documento.getNomeOrgao());
 		String path = "src/main/resources/templates/";
 		
-		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream(path+"/Documento.jrxml"));		
-//		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(documentoList));
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream(path+"/Capa.jrxml"));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JRBeanCollectionDataSource(documentoList));
+//		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 		
 		return JasperExportManager.exportReportToPdf(jasperPrint);
 	}

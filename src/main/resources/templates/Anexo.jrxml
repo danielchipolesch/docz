@@ -5,28 +5,37 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="nomeAnexo" class="br.com.docz.model.entity.Anexo"/>
+	<field name="textoAnexo" class="br.com.docz.model.entity.Anexo"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="30" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="3" width="524" height="30" uuid="9cf47e40-7470-4fc6-ae4d-5662c459ba88"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeAnexo}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="620" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="10" width="524" height="610" uuid="15942544-6ea7-4957-9569-ba33cce809f6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textoAnexo}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

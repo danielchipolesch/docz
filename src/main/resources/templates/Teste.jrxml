@@ -5,46 +5,57 @@
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
-	<field name="nomeAssuntoBasico" class="java.lang.String"/>
+	<field name="nomeOrgao" class="java.lang.String"/>
+	<field name="nomeEpigrafeDocumento" class="java.lang.String"/>
+	<field name="numeroSecundarioAssuntoBasico" class="java.lang.Integer"/>
+	<field name="especie.nomeEspecie" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
-			<staticText>
-				<reportElement x="176" y="0" width="100" height="30" uuid="c6e73b75-f7b1-480a-9177-53141c59ae9b">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02e20166-7fd3-4ce5-b7c1-64b6c4c22d3a"/>
-				</reportElement>
-				<text><![CDATA[nomeAssuntoBasico]]></text>
-			</staticText>
-		</band>
+		<band height="61" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
-				<reportElement x="50" y="30" width="450" height="30" uuid="985b3899-e834-4fdc-a7f5-c82124ecaaaa">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02e20166-7fd3-4ce5-b7c1-64b6c4c22d3a"/>
+				<reportElement x="0" y="0" width="280" height="30" uuid="f3d8d5b6-5c60-42cb-84f5-730556fa17ff">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b7caa9b6-e1a5-498e-af11-be6fe3c24694"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18"/>
+				<textElement>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nomeAssuntoBasico}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeOrgao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="270" height="30" uuid="7d7ae74b-c2ae-45a4-8df2-1c0061c5782b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4ba816c0-0327-4163-8671-bb7edad2f72b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nomeEpigrafeDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="35" width="278" height="30" uuid="c4bc5f6c-91f9-4670-9a3e-3bd9296ddc57">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b90a0a2-3d2e-4303-b3ea-9c02d9291884"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{numeroSecundarioAssuntoBasico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="35" width="270" height="30" uuid="2ddbdd64-bc72-4ebe-b425-bd4beb856116">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="06722a80-bafa-4c11-a437-43e54af9730d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{especie.nomeEspecie}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="460" y="15" width="50" height="30" uuid="8b25657c-f556-4d93-851e-6cb1fc69e45d"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="15" width="50" height="30" uuid="3b40cba0-8d3a-4517-9648-85b387538184"/>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

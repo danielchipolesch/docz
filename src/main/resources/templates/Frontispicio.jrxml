@@ -59,11 +59,11 @@
 				<text><![CDATA[COMANDO DA AERONÁUTICA]]></text>
 			</staticText>
 			<image>
-				<reportElement x="147" y="120" width="268" height="205" uuid="a25ed171-b2c3-4be1-aac5-3fa2b0a73956"/>
+				<reportElement x="147" y="100" width="268" height="205" uuid="a25ed171-b2c3-4be1-aac5-3fa2b0a73956"/>
 				<imageExpression><![CDATA["/src/main/java/br/com/docz/report/image/Gládio.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="100" y="377" width="360" height="30" uuid="4e996970-cf4f-4c06-b98a-afc6147271db"/>
+				<reportElement x="101" y="350" width="360" height="30" uuid="4e996970-cf4f-4c06-b98a-afc6147271db"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="19"/>
 				</textElement>
