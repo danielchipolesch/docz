@@ -63,12 +63,12 @@
     		<version>6.20.5</version>
 		</dependency>
 
-
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-docker-compose</artifactId>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-docker-compose</artifactId>
 <!--			<scope>runtime</scope>-->
 <!--			<optional>true</optional>-->
-<!--		</dependency>-->
+		</dependency>
 <!--		<dependency>-->
 <!--			<groupId>org.postgresql</groupId>-->
 <!--			<artifactId>postgresql</artifactId>-->

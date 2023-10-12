@@ -1,6 +1,17 @@
-version: '3.7'
+version: '3.8'
 
 services:
+#  api:
+#    build: .
+#    restart: always
+#    ports:
+#      - '8080:8080'
+#    depends_on:
+#      - mysql
+#    environment:
+#      - 'spring.datasource.url=jdbc:mysql://127.0.0.1:3306/docz?createDatabaseIfNotExist=true&useSSL=false'
+#      - 'spring.datasource.username=root'
+#      - 'spring.datasource.password=123456'
   mysql:
     image: 'mysql:8.0.28'
     environment:
